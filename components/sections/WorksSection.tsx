@@ -3,7 +3,7 @@ import Image from 'next/image'
 import {client, queries, getImageUrl, type Project} from '@/lib/sanity'
 import styles from './WorksSection.module.css'
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export default async function WorksSection() {
   const featuredProjects = await client.fetch<Project[]>(queries.featuredProjects)

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: 'Explore our portfolio of successful digital projects. Web development, mobile apps, Web3 solutions, and innovative digital products.',
 }
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export default async function WorksPage() {
   const projects = await client.fetch<Project[]>(queries.projects)

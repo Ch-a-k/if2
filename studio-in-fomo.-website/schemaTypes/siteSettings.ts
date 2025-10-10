@@ -60,6 +60,20 @@ export default {
       type: 'number',
       description: 'Hotjar tracking ID',
     },
+    {
+      name: 'telegramBotToken',
+      title: 'Telegram Bot Token',
+      type: 'string',
+      description: 'Telegram Bot API token from @BotFather',
+      placeholder: '1234567890:ABCdefGHIjklmNOPqrstUVwxyz',
+    },
+    {
+      name: 'telegramChatId',
+      title: 'Telegram Chat ID',
+      type: 'string',
+      description: 'Telegram group/channel Chat ID (with minus for groups)',
+      placeholder: '-1001234567890',
+    },
   ],
   preview: {
     select: {

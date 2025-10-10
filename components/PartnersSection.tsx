@@ -2,7 +2,7 @@ import Image from 'next/image'
 import {client, queries, getImageUrl, type Partner} from '@/lib/sanity'
 import styles from './PartnersSection.module.css'
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export default async function PartnersSection() {
   const partners = await client.fetch<Partner[]>(queries.partners)

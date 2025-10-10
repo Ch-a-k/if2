@@ -149,6 +149,45 @@
   transform: translate(2px, -2px);
 }
 
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.successMessage,
+.errorMessage {
+  margin-top: 20px;
+  padding: 16px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  line-height: 1.6;
+  animation: fadeIn 0.3s ease;
+}
+
+.successMessage {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: rgb(16, 185, 129);
+}
+
+.errorMessage {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: rgb(239, 68, 68);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .infoSection {
   display: flex;
   flex-direction: column;

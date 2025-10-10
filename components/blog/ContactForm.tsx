@@ -1,7 +1,8 @@
 'use client'
 
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import styles from './ContactForm.module.css'
+import { collectTrackingData, trackPageVisit } from '@/lib/tracking'
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -11,39 +12,29 @@ export default function ContactForm() {
   })
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
 
-  // Replace with your actual Telegram bot token and chat ID
-  const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN'
-  const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID'
+  useEffect(() => {
+    trackPageVisit(window.location.pathname);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setStatus('sending')
 
-    const message = `
-🔔 New Contact from Blog
-
-👤 Name: ${formData.name}
-📧 Email: ${formData.email}
-
-💬 Message:
-${formData.message}
-    `.trim()
-
     try {
-      const response = await fetch(
-        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
-            text: message,
-            parse_mode: 'HTML',
-          }),
-        }
-      )
+      // Собираем tracking данные
+      const tracking = collectTrackingData()
+
+      // Отправляем через API
+      const response = await fetch('/api/telegram', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          tracking,
+        }),
+      })
 
       if (response.ok) {
         setStatus('success')
@@ -53,6 +44,7 @@ ${formData.message}
         throw new Error('Failed to send')
       }
     } catch (error) {
+      console.error('Error sending form:', error)
       setStatus('error')
       setTimeout(() => setStatus('idle'), 5000)
     }

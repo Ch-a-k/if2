@@ -263,6 +263,8 @@ export interface SiteSettings {
   gtmId?: string
   cloudflareToken?: string
   hotjarId?: number
+  telegramBotToken?: string
+  telegramChatId?: string
 }
 
 // Queries

@@ -8,7 +8,7 @@ import PartnersSection from '@/components/PartnersSection'
 import ContactForm from '@/components/blog/ContactForm'
 import styles from './page.module.css'
 
-export const revalidate = 60
+export const revalidate = 3600
 
 interface PageProps {
   params: {

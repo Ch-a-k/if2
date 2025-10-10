@@ -2,7 +2,7 @@ import styles from './ClutchAwardsSection.module.css';
 import Image from 'next/image';
 import {client, queries, type ClutchBadge, getImageUrl} from '@/lib/sanity';
 
-export const revalidate = 10; // Обновление каждые 10 секунд
+export const revalidate = 3600; // Обновление каждый час (или по webhook)
 
 export default async function ClutchAwardsSection() {
   let badges: ClutchBadge[] = [];

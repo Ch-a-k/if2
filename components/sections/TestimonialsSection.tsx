@@ -1,7 +1,7 @@
 import {client, queries, type TestimonialNew} from '@/lib/sanity';
 import TestimonialsClient from './TestimonialsClient';
 
-export const revalidate = 10; // Обновление каждые 10 секунд
+export const revalidate = 3600; // Обновление каждый час (или по webhook)
 
 export default async function TestimonialsSection() {
   let testimonials: TestimonialNew[] = [];

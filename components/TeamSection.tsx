@@ -1,7 +1,7 @@
 import {client, queries, type TeamMember, type Specialist} from '@/lib/sanity'
 import styles from './TeamSection.module.css'
 
-export const revalidate = 10 // Обновление каждые 10 секунд
+export const revalidate = 3600 // Обновление каждый час (или по webhook)
 
 export default async function TeamSection() {
   let teamMembers: TeamMember[] = []
