@@ -1,13 +1,21 @@
-<svg width="180" height="48" viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- IN -->
-  <text x="0" y="36" font-family="Inter, -apple-system, sans-serif" font-size="32" font-weight="800" fill="#ffffff" letter-spacing="-1">IN</text>
-  
-  <!-- - -->
-  <text x="48" y="36" font-family="Inter, -apple-system, sans-serif" font-size="32" font-weight="800" fill="#ffffff" letter-spacing="-1">-</text>
-  
-  <!-- FOMO -->
-  <text x="68" y="36" font-family="Inter, -apple-system, sans-serif" font-size="32" font-weight="800" fill="#ffffff" letter-spacing="-1">FOMO</text>
-  
-  <!-- . (точка оранжевая) -->
-  <circle cx="172" cy="32" r="6" fill="#ff2a00"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_Слой_1" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 917.81 215.11">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: FredokaOneRUSBYME-Regular, 'Fredoka One (RUS BY ME)';
+        font-size: 195.11px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: #ff2a00;
+        letter-spacing: 0em;
+      }
+    </style>
+  </defs>
+  <text class="cls-1" transform="translate(0 169.07)"><tspan class="cls-2" x="0" y="0">IN-FOMO</tspan><tspan class="cls-3" x="871.56" y="0">.</tspan></text>
 </svg>
