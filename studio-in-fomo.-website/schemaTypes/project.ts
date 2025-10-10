@@ -179,7 +179,8 @@ export default defineType({
       media: 'coverImage',
       featured: 'featured',
     },
-    prepare({title, media, featured}) {
+    prepare(selection: any) {
+      const {title, media, featured} = selection;
       return {
         title: featured ? `⭐ ${title}` : title,
         media,

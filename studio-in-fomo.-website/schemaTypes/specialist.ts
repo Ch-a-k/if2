@@ -63,7 +63,8 @@ export default defineType({
       icon: 'icon',
       iconType: 'iconType',
     },
-    prepare({title, count, icon, iconType}) {
+    prepare(selection: any) {
+      const {title, count, icon, iconType} = selection;
       return {
         title: iconType === 'emoji' ? `${icon} ${title}` : `${title}`,
         subtitle: `${count} specialists`,

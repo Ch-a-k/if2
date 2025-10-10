@@ -131,7 +131,8 @@ export default defineType({
       hasMedia: 'hasMedia',
       media: 'mediaImage',
     },
-    prepare({title, subtitle, hasMedia, media}) {
+    prepare(selection: any) {
+      const {title, subtitle, hasMedia, media} = selection;
       return {
         title: hasMedia ? `📷 ${title}` : title,
         subtitle: subtitle,

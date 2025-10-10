@@ -65,7 +65,8 @@ export default {
     select: {
       title: 'title',
     },
-    prepare({ title }: { title: string }) {
+    prepare(selection: any) {
+      const { title } = selection;
       return {
         title: title || 'Site Settings',
         subtitle: 'Global site configuration',

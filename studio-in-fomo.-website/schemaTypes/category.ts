@@ -51,7 +51,8 @@ export default defineType({
       title: 'title',
       type: 'type',
     },
-    prepare({title, type}) {
+    prepare(selection: any) {
+      const {title, type} = selection;
       return {
         title: title,
         subtitle: type,
