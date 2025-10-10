@@ -12,7 +12,7 @@ export default function Header() {
       <div className={styles.container}>
         <div className={styles.leftSection}>
           <Link href="/" className={styles.logo}>
-            <img src="/logo.svg" alt="IN-FOMO." className={styles.logoImage} />
+            <img src="/logo.png" alt="IN-FOMO." className={styles.logoImage} />
           </Link>
         </div>
 

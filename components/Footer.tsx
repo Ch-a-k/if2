@@ -12,7 +12,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div className={styles.brandColumn}>
             <Link href="/" className={styles.logo}>
-              <img src="/logo.svg" alt="IN-FOMO." className={styles.logoImage} />
+              <img src="/logo.png" alt="IN-FOMO." className={styles.logoImage} />
             </Link>
             <p className={styles.brandDescription}>
               Building innovative digital solutions for forward-thinking businesses.

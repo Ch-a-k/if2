@@ -130,7 +130,7 @@
 
 ## 📁 Измененные файлы
 
-1. `/public/logo.svg` - новый логотип
+1. `/public/logo.png` - новый логотип
 2. `/components/Header.tsx` - убран текст
 3. `/components/Header.module.css` - упрощены стили
 4. `/components/sections/ApproachSection.tsx` - 8 этапов вместо 4
