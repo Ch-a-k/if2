@@ -13,6 +13,9 @@ export const revalidate = 3600
 
 export default async function WorksPage() {
   const projects = await client.fetch<Project[]>(queries.projects)
+  
+  console.log('📂 Projects loaded:', projects.length)
+  console.log('📂 First project:', projects[0])
 
   return (
     <div className={styles.works}>
@@ -45,7 +48,7 @@ export default async function WorksPage() {
                 </div>
                 <div className={styles.projectInfo}>
                   <div className={styles.projectMeta}>
-                    <span className={styles.projectCategory}>{project.category.title}</span>
+                    <span className={styles.projectCategory}>{project.category?.title || 'Uncategorized'}</span>
                     <span className={styles.projectYear}>{project.year}</span>
                   </div>
                   <h3 className={styles.projectTitle}>{project.title}</h3>

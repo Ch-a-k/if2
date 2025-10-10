@@ -7,6 +7,9 @@ export const revalidate = 3600
 
 export default async function WorksSection() {
   const featuredProjects = await client.fetch<Project[]>(queries.featuredProjects)
+  
+  console.log('⭐ Featured projects loaded:', featuredProjects.length)
+  console.log('⭐ First featured project:', featuredProjects[0])
 
   return (
     <section className={styles.works}>
@@ -41,7 +44,7 @@ export default async function WorksSection() {
                 />
               </div>
               <div className={styles.projectInfo}>
-                <div className={styles.projectCategory}>{project.category.title}</div>
+                <div className={styles.projectCategory}>{project.category?.title || 'Uncategorized'}</div>
                 <h3 className={styles.projectTitle}>{project.title}</h3>
                 <p className={styles.projectDescription}>{project.excerpt}</p>
               </div>
