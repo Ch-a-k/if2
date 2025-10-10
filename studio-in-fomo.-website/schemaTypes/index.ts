@@ -7,8 +7,12 @@ import project from './project'
 import blogPost from './blogPost'
 import author from './author'
 import partner from './partner'
+import siteSettings from './siteSettings'
 
 export const schemaTypes = [
+  // Settings
+  siteSettings,
+  
   // Content Management
   category,
   

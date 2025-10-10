@@ -243,6 +243,28 @@ export interface BlogPost {
   featured: boolean
 }
 
+export interface SiteSettings {
+  _id: string
+  title: string
+  description: string
+  ogImage?: {
+    asset: {
+      _ref: string
+      _type: 'reference'
+    }
+    alt?: string
+  }
+  favicon?: {
+    asset: {
+      _ref: string
+      _type: 'reference'
+    }
+  }
+  gtmId?: string
+  cloudflareToken?: string
+  hotjarId?: number
+}
+
 // Queries
 export const queries = {
   // Team
@@ -322,4 +344,7 @@ export const queries = {
   categories: `*[_type == "category"] | order(title asc)`,
   blogCategories: `*[_type == "category" && (type == "blog" || type == "both")] | order(title asc)`,
   projectCategories: `*[_type == "category" && (type == "project" || type == "both")] | order(title asc)`,
+  
+  // Site Settings
+  siteSettings: `*[_type == "siteSettings" && _id == "siteSettings"][0]`,
 }

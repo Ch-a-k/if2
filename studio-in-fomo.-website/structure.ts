@@ -104,6 +104,15 @@ export const structure = (S: StructureBuilder) =>
             .title('Settings')
             .items([
               S.listItem()
+                .title('Site Settings')
+                .icon(() => '🌐')
+                .child(
+                  S.document()
+                    .schemaType('siteSettings')
+                    .documentId('siteSettings')
+                    .title('Site Settings')
+                ),
+              S.listItem()
                 .title('Categories')
                 .icon(() => '🏷️')
                 .child(S.documentTypeList('category').title('All Categories')),
