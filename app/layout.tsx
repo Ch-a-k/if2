@@ -2,6 +2,7 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
+import CacheRefreshButton from '@/components/CacheRefreshButton';
 import GoogleTagManager from '@/components/GoogleTagManager';
 import Analytics from '@/components/Analytics';
 import { client, queries, getImageUrl } from '@/lib/sanity';
@@ -80,6 +81,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <CookieBanner />
+        <CacheRefreshButton />
       </body>
     </html>
   );

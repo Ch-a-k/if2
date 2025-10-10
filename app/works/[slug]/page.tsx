@@ -6,6 +6,7 @@ import {PortableText} from '@portabletext/react'
 import {client, queries, getImageUrl, type Project} from '@/lib/sanity'
 import PartnersSection from '@/components/PartnersSection'
 import ContactForm from '@/components/blog/ContactForm'
+import ProjectGallery from '@/components/ProjectGallery'
 import styles from './page.module.css'
 
 export const revalidate = 3600
@@ -145,22 +146,14 @@ export default async function ProjectPage({params}: PageProps) {
         <section className={styles.gallery}>
           <div className={styles.container}>
             <h2 className={styles.sectionTitle}>Project Gallery</h2>
-            <div className={styles.galleryGrid}>
-              {project.gallery.map((item, index) => (
-                <div
-                  key={index}
-                  className={`${styles.galleryItem} ${item.wide ? styles.galleryItemWide : ''}`}
-                >
-                  <Image
-                    src={getImageUrl(item) || '/placeholder.svg'}
-                    alt={item.alt || `${project.title} image ${index + 1}`}
-                    width={800}
-                    height={600}
-                    className={styles.galleryImage}
-                  />
-                </div>
-              ))}
-            </div>
+            <ProjectGallery
+              images={project.gallery.map((item, index) => ({
+                url: getImageUrl(item) || '/placeholder.svg',
+                alt: item.alt || `${project.title} image ${index + 1}`,
+                wide: item.wide,
+              }))}
+              projectTitle={project.title}
+            />
           </div>
         </section>
       )}

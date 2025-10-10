@@ -18,7 +18,6 @@ function convertToEmbedUrl(url: string): string {
   if (url.includes('youtube.com/watch')) {
     const videoId = new URL(url).searchParams.get('v');
     if (videoId) {
-      console.log('🔄 Converting YouTube URL to embed:', url, '→', `https://www.youtube.com/embed/${videoId}`);
       return `https://www.youtube.com/embed/${videoId}`;
     }
   }
@@ -27,7 +26,6 @@ function convertToEmbedUrl(url: string): string {
   if (url.includes('youtu.be/')) {
     const videoId = url.split('youtu.be/')[1]?.split('?')[0];
     if (videoId) {
-      console.log('🔄 Converting YouTube short URL to embed:', url, '→', `https://www.youtube.com/embed/${videoId}`);
       return `https://www.youtube.com/embed/${videoId}`;
     }
   }
@@ -36,7 +34,6 @@ function convertToEmbedUrl(url: string): string {
   if (url.includes('vimeo.com/') && !url.includes('player.vimeo.com')) {
     const videoId = url.split('vimeo.com/')[1]?.split('?')[0];
     if (videoId) {
-      console.log('🔄 Converting Vimeo URL to embed:', url, '→', `https://player.vimeo.com/video/${videoId}`);
       return `https://player.vimeo.com/video/${videoId}`;
     }
   }
@@ -62,17 +59,6 @@ export default function TestimonialsClient({ testimonials }: TestimonialsClientP
 
   const currentTestimonial = testimonials[activeIndex];
 
-  // Подробное логирование для отладки
-  console.log('🔍 Current testimonial:', {
-    author: currentTestimonial.author,
-    hasMedia: currentTestimonial.hasMedia,
-    mediaType: currentTestimonial.mediaType,
-    videoSource: currentTestimonial.videoSource,
-    hasVideoFile: !!currentTestimonial.mediaVideoFile,
-    hasVideoUrl: !!currentTestimonial.mediaVideoUrl,
-    videoUrl: currentTestimonial.mediaVideoUrl,
-  });
-
   // Подготовка данных медиа
   let mediaUrl: string | null = null;
   let mediaType: 'image' | 'video' | 'iframe' | null = null;
@@ -81,30 +67,22 @@ export default function TestimonialsClient({ testimonials }: TestimonialsClientP
     if (currentTestimonial.mediaType === 'image' && currentTestimonial.mediaImage) {
       mediaUrl = getImageUrl(currentTestimonial.mediaImage);
       mediaType = 'image';
-      console.log('✅ Image media:', mediaUrl);
     } else if (currentTestimonial.mediaType === 'video') {
       if (currentTestimonial.videoSource === 'file' && currentTestimonial.mediaVideoFile) {
         // Загруженный файл
         mediaUrl = getFileUrl(currentTestimonial.mediaVideoFile);
         mediaType = 'video';
-        console.log('✅ Video file:', mediaUrl);
       } else if (currentTestimonial.videoSource === 'url' && currentTestimonial.mediaVideoUrl) {
         // YouTube/Vimeo URL - автоматическая конвертация в embed формат
         mediaUrl = convertToEmbedUrl(currentTestimonial.mediaVideoUrl);
         // Определяем нужен ли iframe (для YouTube/Vimeo)
         if (mediaUrl.includes('youtube.com') || mediaUrl.includes('youtu.be') || mediaUrl.includes('vimeo.com')) {
           mediaType = 'iframe';
-          console.log('✅ YouTube/Vimeo iframe:', mediaUrl);
         } else {
           mediaType = 'video';
-          console.log('✅ Direct video URL:', mediaUrl);
         }
-      } else {
-        console.log('⚠️ Video selected but no source found');
       }
     }
-  } else {
-    console.log('ℹ️ No media for this testimonial');
   }
 
   const companyLogoUrl = currentTestimonial.hasCompanyLogo && currentTestimonial.companyLogo

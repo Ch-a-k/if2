@@ -93,6 +93,13 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'reference',
+      to: [{type: 'category'}],
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'process',
       title: 'Project Process',
       type: 'array',

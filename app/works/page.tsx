@@ -13,9 +13,6 @@ export const revalidate = 3600
 
 export default async function WorksPage() {
   const projects = await client.fetch<Project[]>(queries.projects)
-  
-  console.log('📂 Projects loaded:', projects.length)
-  console.log('📂 First project:', projects[0])
 
   return (
     <div className={styles.works}>
