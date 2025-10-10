@@ -77,7 +77,7 @@ export default async function ProjectPage({params}: PageProps) {
           <h1 className={styles.title}>{project.title}</h1>
           
           <div className={styles.metaInfo}>
-            <span className={styles.category}>{project.category.title}</span>
+            <span className={styles.category}>{project.category?.title || 'Uncategorized'}</span>
             <span className={styles.year}>{project.year}</span>
             {project.client && <span className={styles.client}>{project.client}</span>}
           </div>
