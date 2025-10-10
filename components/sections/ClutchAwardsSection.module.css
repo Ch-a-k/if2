@@ -1,0 +1,352 @@
+.clutchSection {
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.clutchSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.version {
+  font-size: 1.25rem;
+  color: #888;
+  font-weight: 500;
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  color: #FFD700;
+  font-size: 1.5rem;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
+}
+
+/* Horizontal Infinite Scroll */
+.scrollContainer {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 60px;
+  padding: 20px 0;
+}
+
+.scrollContainer::before,
+.scrollContainer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.scrollContainer::before {
+  left: 0;
+  background: linear-gradient(90deg, #000000 0%, transparent 100%);
+}
+
+.scrollContainer::after {
+  right: 0;
+  background: linear-gradient(90deg, transparent 0%, #000000 100%);
+}
+
+.scrollContent {
+  display: flex;
+  gap: 30px;
+  animation: infiniteScroll 60s linear infinite;
+  width: fit-content;
+}
+
+/* Pause animation on hover */
+.scrollContent:hover {
+  animation-play-state: paused;
+}
+
+@keyframes infiniteScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% / 3));
+  }
+}
+
+.badgeCard {
+  flex-shrink: 0;
+  width: 220px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.badgeCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.badgeCard:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+.badgeCard:hover::before {
+  opacity: 1;
+}
+
+.badgeCard:hover .grayscaleImage {
+  filter: grayscale(0%) brightness(1.1);
+  transform: scale(1.05);
+}
+
+.badgeImage {
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.grayscaleImage {
+  filter: grayscale(100%) brightness(0.9);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.badgeTitle {
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.badgeCard:hover .badgeTitle {
+  opacity: 1;
+}
+
+.ctaLink {
+  text-align: center;
+}
+
+.clutchLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  padding: 18px 36px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.clutchLink::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.clutchLink:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+}
+
+.clutchLink:hover::before {
+  left: 100%;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .clutchSection {
+    padding: 80px 0;
+  }
+
+  .container {
+    padding: 0 30px;
+  }
+
+  .header {
+    margin-bottom: 50px;
+  }
+
+  .badgeCard {
+    width: 200px;
+  }
+
+  .badgeImage {
+    width: 140px;
+    height: 140px;
+  }
+
+  .scrollContainer::before,
+  .scrollContainer::after {
+    width: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .clutchSection {
+    padding: 60px 0;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .header {
+    margin-bottom: 40px;
+  }
+
+  .title {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+  }
+
+  .subtitle {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .version {
+    font-size: 1rem;
+  }
+
+  .stars {
+    gap: 3px;
+  }
+
+  .star {
+    font-size: 1.25rem;
+  }
+
+  .badgeCard {
+    width: 180px;
+    padding: 20px 15px;
+  }
+
+  .badgeImage {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 15px;
+  }
+
+  .badgeTitle {
+    font-size: 0.75rem;
+  }
+
+  .clutchLink {
+    font-size: 1rem;
+    padding: 14px 28px;
+  }
+
+  .scrollContainer::before,
+  .scrollContainer::after {
+    width: 60px;
+  }
+
+  .scrollContent {
+    gap: 20px;
+    animation-duration: 40s;
+  }
+}
+
+@media (max-width: 480px) {
+  .badgeCard {
+    width: 160px;
+  }
+
+  .badgeImage {
+    width: 100px;
+    height: 100px;
+  }
+
+  .scrollContainer::before,
+  .scrollContainer::after {
+    width: 40px;
+  }
+}

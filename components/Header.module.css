@@ -1,0 +1,230 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 40px 0;
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.leftSection {
+  pointer-events: auto;
+}
+
+.logo {
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.logoImage {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.rightSection {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  pointer-events: auto;
+}
+
+.nav {
+  display: flex;
+  gap: 8px;
+  padding: 20px 24px;
+}
+
+.navLink {
+  position: relative;
+  padding: 0 16px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  color: rgb(255, 255, 255);
+}
+
+.navLink:hover {
+  color: #ffffff;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background: #ffffff;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.navLink:hover::after {
+  transform: scaleX(1);
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.ctaButton {
+  background: #000000;
+  color: #ffffff;
+  padding: 20px 32px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s ease;
+}
+
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 12px;
+  padding: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.8)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: rotateBorder 3s linear infinite;
+  z-index: -1;
+  background-size: 300% 100%;
+}
+
+@keyframes rotateBorder {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 300% 0%;
+  }
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+}
+
+.menuButton {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: #0d0d0d;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.menuButton span {
+  width: 24px;
+  height: 2px;
+  background: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.mobileMenu {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px 60px;
+  background: #0d0d0d;
+  margin-top: 20px;
+  border-radius: 8px;
+  pointer-events: auto;
+}
+
+.mobileNavLink {
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.mobileNavLink:hover {
+  background: #1a1a1a;
+}
+
+.mobileCtaButton {
+  background: #ffffff;
+  color: #000000;
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 12px;
+}
+
+@media (max-width: 1024px) {
+  .nav {
+    display: none;
+  }
+
+  .actions {
+    display: none;
+  }
+
+  .menuButton {
+    display: flex;
+  }
+
+  .mobileMenu {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 24px 0;
+  }
+
+  .container {
+    padding: 0 24px;
+  }
+
+  .mobileMenu {
+    padding: 24px;
+  }
+
+  .logoText {
+    font-size: 20px;
+  }
+
+  .logoWrapper {
+    padding: 16px 24px;
+  }
+}

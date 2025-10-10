@@ -1,0 +1,168 @@
+'use client';
+
+import styles from './MarqueeSection.module.css';
+
+export default function MarqueeSection() {
+  const technologies = [
+    'JavaScript',
+'React',
+'TypeScript',
+'Node.js',
+'Python',
+'Next.js',
+'AWS',
+'Docker',
+'Kubernetes',
+'PostgreSQL',
+'MongoDB',
+'GraphQL',
+'REST API',
+'HTML',
+'CSS',
+'Vue.js',
+'Angular',
+'Redis',
+'Firebase',
+'Git',
+'CI/CD',
+'Jenkins',
+'Selenium',
+'Express.js',
+'Ruby on Rails',
+'Go',
+'Java',
+'Spring',
+'.NET',
+'Flutter',
+'Swift',
+'Kotlin',
+'Terraform',
+'Linux',
+'Nginx',
+'Apache',
+'Elasticsearch',
+'RabbitMQ',
+'Kafka',
+'MySQL',
+'MariaDB',
+'C++',
+'C#',
+'PHP',
+'WordPress',
+'SAP',
+'Oracle',
+'Blockchain',
+'Solidity',
+'Rust',
+
+// Мобильная разработка и фреймворки
+'Reac Native',
+'Ionic',
+'Xamarin',
+'Cordova',
+'Svelte',
+'Quasar',
+'Capacitor',
+
+// QA / тестирование
+'Postman',
+'Jest',
+'Cypress',
+'Mocha',
+'Chai',
+'JUnit',
+'TestNG',
+'Appium',
+'Robot Framework',
+'Playwright',
+
+// UX/UI & дизайн
+'Figma',
+'Adobe XD',
+'Sketch',
+'InVision',
+'Balsamiq',
+'Framer',
+'Principle',
+'Miro',
+'Canva',
+'Webflow',
+'Zeplin',
+'Airtable',
+'Marvel App',
+'ProtoPie',
+'UXPin',
+'Adobe Photoshop',
+'Adobe Illustrator',
+
+// Маркетинговые и аналитические инструменты
+'Google Analytics',
+'Google Tag Manager',
+'Hotjar',
+'Ahrefs',
+'SEMRush',
+'HubSpot',
+'Mailchimp',
+'Zapier',
+'Facebook Ads',
+'Google Ads',
+'LinkedIn Ads',
+'TikTok Ads',
+'Meta Business Suite',
+'Tableau',
+'Power BI',
+'Looker',
+'Segment',
+'Amplitude',
+'Mixpanel',
+'Optimizely',
+'Marketo',
+'ActiveCampaign',
+'Pardot',
+'Salesforce',
+'Intercom',
+'Drift',
+'Crazy Egg',
+
+// Менеджмент проектов и коммуникация
+'Trello',
+'Jira',
+'ClickUp',
+'Asana',
+'Monday.com',
+'Slack',
+'Confluence',
+'Notion',
+'Mattermost',
+'Basecamp',
+
+// DevOps / Infrastructure
+'Ansible',
+'Chef',
+'Puppet',
+'Vagrant',
+'Prometheus',
+'Grafana',
+'ELK Stack',
+'Consul',
+'Vault',
+'Nomad',
+'Istio',
+'OpenShift',
+'Harbor',
+'Argo CD',
+'Flux',
+  ];
+
+  return (
+    <section className={styles.marquee}>
+      <div className={styles.marqueeTrack}>
+        {[...technologies, ...technologies, ...technologies].map((tech, index) => (
+          <span key={index} className={styles.marqueeItem}>
+            {tech}
+          </span>
+        ))}
+      </div>
+    </section>
+  );
+}

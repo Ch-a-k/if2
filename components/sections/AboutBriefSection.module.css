@@ -1,0 +1,107 @@
+.aboutBrief {
+  padding: 160px 0;
+  position: relative;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 120px;
+  align-items: start;
+}
+
+.leftContent {
+  position: sticky;
+  top: 160px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.rightContent {
+  padding-top: 20px;
+}
+
+.description {
+  font-size: 18px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 24px;
+}
+
+.learnMoreButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #0d0d0d;
+  color: #ffffff;
+  padding: 18px 32px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.4s ease;
+  margin-top: 20px;
+}
+
+.learnMoreButton:hover {
+  background: #1a1a1a;
+  transform: translateX(8px);
+}
+
+.learnMoreButton svg {
+  transition: transform 0.3s ease;
+}
+
+.learnMoreButton:hover svg {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 300px 1fr;
+    gap: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutBrief {
+    padding: 100px 0;
+  }
+
+  .container {
+    padding: 0 24px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .leftContent {
+    position: relative;
+    top: 0;
+  }
+
+  .description {
+    font-size: 16px;
+  }
+}

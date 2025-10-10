@@ -1,0 +1,467 @@
+.teamSection {
+  padding: 120px 0 160px;
+  position: relative;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 80px;
+  align-items: start;
+  margin-bottom: 80px;
+}
+
+.label {
+  font-size: 120px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.05);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.headerContent {
+  padding-top: 20px;
+}
+
+.title {
+  font-size: clamp(36px, 4vw, 64px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  font-size: 20px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 700px;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.memberCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.memberCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.memberCard:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.memberCard:hover::before {
+  opacity: 1;
+}
+
+.memberInitial {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.memberCard:hover .memberInitial {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Различные цвета для разных категорий */
+.memberCard.leadership .memberInitial {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
+}
+
+.memberCard.management .memberInitial {
+  background: linear-gradient(135deg, rgba(200, 200, 200, 0.15) 0%, rgba(200, 200, 200, 0.08) 100%);
+}
+
+.memberCard.development .memberInitial {
+  background: linear-gradient(135deg, rgba(180, 180, 180, 0.15) 0%, rgba(180, 180, 180, 0.08) 100%);
+}
+
+.memberCard.design .memberInitial {
+  background: linear-gradient(135deg, rgba(160, 160, 160, 0.15) 0%, rgba(160, 160, 160, 0.08) 100%);
+}
+
+.memberInfo {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.memberName {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #fff;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.memberCard:hover .memberName {
+  color: #ffffff;
+}
+
+.memberRole {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.3s ease;
+}
+
+.memberCard:hover .memberRole {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Dedicated Team Section */
+.dedicatedSection {
+  margin-top: 120px;
+  padding-top: 80px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dedicatedHeader {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.dedicatedTitle {
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.dedicatedSubtitle {
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.specialistsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.specialistCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 32px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.specialistCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.specialistCard:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.specialistCard:hover::before {
+  opacity: 1;
+}
+
+.specialistIcon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.svgWrapper {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.svgWrapper svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.specialistCard:hover .svgWrapper svg {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.iconImage {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.specialistCard:hover .iconImage {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.specialistCard:hover .specialistIcon {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.specialistInfo {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.specialistCount {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.specialistTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.01em;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .header {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+  }
+
+  .label {
+    font-size: 80px;
+  }
+
+  .teamGrid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .dedicatedSection {
+    margin-top: 80px;
+    padding-top: 60px;
+  }
+
+  .dedicatedHeader {
+    margin-bottom: 48px;
+  }
+
+  .specialistsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .teamSection {
+    padding: 80px 0 100px;
+  }
+
+  .container {
+    padding: 0 24px;
+  }
+
+  .header {
+    margin-bottom: 48px;
+  }
+
+  .teamGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .memberCard {
+    padding: 24px;
+  }
+
+  .memberInitial {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+    border-radius: 10px;
+  }
+
+  .memberName {
+    font-size: 18px;
+  }
+
+  .memberRole {
+    font-size: 13px;
+  }
+
+  .dedicatedSection {
+    margin-top: 60px;
+    padding-top: 48px;
+  }
+
+  .dedicatedHeader {
+    margin-bottom: 40px;
+  }
+
+  .dedicatedTitle {
+    font-size: 28px;
+  }
+
+  .dedicatedSubtitle {
+    font-size: 16px;
+  }
+
+  .specialistsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  .specialistCard {
+    padding: 24px 20px;
+  }
+
+  .specialistIcon {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+  }
+
+  .svgWrapper {
+    width: 28px;
+    height: 28px;
+  }
+
+  .iconImage {
+    width: 28px;
+    height: 28px;
+  }
+
+  .specialistCount {
+    font-size: 28px;
+  }
+
+  .specialistTitle {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .memberCard {
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .memberInitial {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+
+  .memberName {
+    font-size: 16px;
+  }
+
+  .specialistsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .specialistCard {
+    padding: 20px 16px;
+  }
+
+  .specialistIcon {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+
+  .svgWrapper {
+    width: 24px;
+    height: 24px;
+  }
+
+  .iconImage {
+    width: 24px;
+    height: 24px;
+  }
+
+  .specialistCount {
+    font-size: 24px;
+  }
+}

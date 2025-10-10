@@ -1,0 +1,111 @@
+.cta {
+  padding: 200px 0;
+  position: relative;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+.content {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: clamp(48px, 7vw, 100px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 60px;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: #000000;
+  color: #ffffff;
+  padding: 28px 48px;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.8)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: rotateBorder 3s linear infinite;
+  z-index: -1;
+  background-size: 300% 100%;
+}
+
+@keyframes rotateBorder {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 300% 0%;
+  }
+}
+
+.ctaButton:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(255, 255, 255, 0.2);
+}
+
+.ctaButton svg {
+  transition: transform 0.4s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.ctaButton:hover svg {
+  transform: translate(4px, -4px);
+}
+
+.ctaButton span {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .cta {
+    padding: 120px 0;
+  }
+
+  .container {
+    padding: 0 24px;
+  }
+
+  .title {
+    margin-bottom: 40px;
+  }
+
+  .ctaButton {
+    padding: 24px 40px;
+    font-size: 16px;
+  }
+}
