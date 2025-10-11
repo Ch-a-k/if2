@@ -37,7 +37,7 @@
 
 .logoImage {
   object-fit: contain;
-  filter: brightness(0) invert(1);
+  /* filter: brightness(0) invert(1); */
 }
 
 .logoPlaceholder {
