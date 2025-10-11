@@ -2,7 +2,7 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {schemaTypes} from './schemaTypes'
 import structure from './structure'
-import {cacheRefreshTool} from './tools/cacheRefresh'
+import {cacheRefreshAction} from './actions/cacheRefresh'
 
 export default defineConfig({
   name: 'default',
@@ -15,7 +15,7 @@ export default defineConfig({
     structureTool({
       structure,
     }),
-    cacheRefreshTool(),
+    cacheRefreshAction(),
   ],
 
   schema: {

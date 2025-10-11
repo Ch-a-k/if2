@@ -13,17 +13,36 @@ export async function POST() {
     revalidatePath('/blog/[slug]', 'page')
     revalidatePath('/contact')
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       revalidated: true,
       now: Date.now(),
       message: 'Cache refreshed successfully'
     })
+
+    // CORS заголовки для Sanity Studio
+    response.headers.set('Access-Control-Allow-Origin', '*')
+    response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS')
+    response.headers.set('Access-Control-Allow-Headers', 'Content-Type')
+
+    return response
   } catch (err) {
     console.error('Error refreshing cache:', err)
-    return NextResponse.json(
+    
+    const errorResponse = NextResponse.json(
       { message: 'Error refreshing cache', error: err },
       { status: 500 }
     )
+
+    errorResponse.headers.set('Access-Control-Allow-Origin', '*')
+    return errorResponse
   }
+}
+
+export async function OPTIONS() {
+  const response = new NextResponse(null, { status: 200 })
+  response.headers.set('Access-Control-Allow-Origin', '*')
+  response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS')
+  response.headers.set('Access-Control-Allow-Headers', 'Content-Type')
+  return response
 }
 
