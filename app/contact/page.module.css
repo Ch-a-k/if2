@@ -28,7 +28,11 @@
 }
 
 .content {
-  padding: 80px 0 160px;
+  padding: 80px 0;
+}
+
+.offices {
+  padding: 100px 0 160px;
 }
 
 .grid {
@@ -91,7 +95,7 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  background: #000000;
+  background: #ff2a00;
   color: #ffffff;
   padding: 20px 40px;
   border-radius: 12px;
@@ -138,7 +142,7 @@
 
 .submitButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px #ff2a00;
 }
 
 .submitButton svg {
@@ -271,5 +275,107 @@
 
   .infoCard {
     padding: 36px 28px;
+  }
+}
+
+/* Offices Section */
+.officesHeader {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.officesTitle {
+  font-size: clamp(36px, 4vw, 64px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+
+.officesDescription {
+  font-size: 20px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.officesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+}
+
+.officeCard {
+  background: #000;
+  padding: 60px 40px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;;
+  margin: 5px;
+}
+
+.officeCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.03);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.officeCard:hover::before {
+  opacity: 1;
+}
+
+.officeCard:hover {
+  transform: scale(1.02);
+  z-index: 1;
+}
+
+.officeIcon {
+  margin-bottom: 24px;
+  filter: grayscale(100%);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.officeCard:hover .officeIcon {
+  filter: grayscale(0%);
+  opacity: 1;
+  /* transform: scale(1.1); */
+}
+
+.officeCity {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.officeAddress {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 1024px) {
+  .officesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .offices {
+    padding: 80px 0 100px;
+  }
+
+  .officesHeader {
+    margin-bottom: 60px;
+  }
+
+  .officeCard {
+    padding: 40px 28px;
   }
 }

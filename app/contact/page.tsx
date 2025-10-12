@@ -134,27 +134,85 @@ export default function ContactPage() {
 
             <div className={styles.infoSection}>
               <div className={styles.infoCard}>
-                <div className={styles.infoIcon}>✉</div>
+                <div className={styles.infoIcon}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                </div>
                 <div className={styles.infoLabel}>Email</div>
                 <a href="mailto:info@in-fomo.com" className={styles.infoValue}>
                   info@in-fomo.com
                 </a>
               </div>
 
-             
-
               <div className={styles.infoCard}>
                 <div className={styles.infoIcon}>
-                ⏃
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                  </svg>
                 </div>
                 <div className={styles.infoLabel}>Telegram</div>
                 <a href="https://t.me/in_fomo" className={styles.infoValue}>
                   @in_fomo
                 </a>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-             
-
+      <section className={styles.offices}>
+        <div className={styles.container}>
+          <div className={styles.officesHeader}>
+            <h2 className={styles.officesTitle}>Our Offices</h2>
+            <p className={styles.officesDescription}>
+              We operate across multiple time zones to serve our global clients
+            </p>
+          </div>
+          <div className={styles.officesGrid}>
+            <div className={styles.officeCard}>
+              <div className={styles.officeIcon}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <h3 className={styles.officeCity}>Scottsdale, USA</h3>
+              <p className={styles.officeAddress}>15169 N Scottsdale Rd Suite 205, Scottsdale, AZ 85254, USA</p>
+            </div>
+            
+            <div className={styles.officeCard}>
+              <div className={styles.officeIcon}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <h3 className={styles.officeCity}>Warsaw, Poland</h3>
+              <p className={styles.officeAddress}>Stawki 2A, 00-193 Warszawa</p>
+            </div>
+            
+            <div className={styles.officeCard}>
+              <div className={styles.officeIcon}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <h3 className={styles.officeCity}>Kyiv, Ukraine</h3>
+              <p className={styles.officeAddress}>вул. Антоновича, 44, Київ, Украина, 03186</p>
+            </div>
+            
+            <div className={styles.officeCard}>
+              <div className={styles.officeIcon}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <h3 className={styles.officeCity}>Tallinn, Estonia</h3>
+              <p className={styles.officeAddress}>Lõõtsa tn 12, 11415 Tallinn, Эстония</p>
             </div>
           </div>
         </div>

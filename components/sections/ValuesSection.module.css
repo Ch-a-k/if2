@@ -32,6 +32,31 @@
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.dragHint {
+  text-align: center;
+  margin-top: 40px;
+  padding: 0 24px;
+  display: none;
+}
+
+.dragHint span {
+  font-size: 19px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.05em;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .rightContent {
@@ -127,7 +152,7 @@
   }
 
   .container {
-    padding: 0 24px;
+    padding: 0;
     grid-template-columns: 1fr;
     gap: 48px;
   }
@@ -135,19 +160,48 @@
   .leftSticky {
     position: relative;
     top: 0;
+    padding: 0 24px;
+  }
+
+  .dragHint {
+    display: block;
+    margin-top: 24px;
   }
 
   .rightContent {
-    gap: 60px;
-    padding: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    padding: 0 24px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .rightContent::-webkit-scrollbar {
+    display: none;
   }
 
   .valueCard {
+    flex: 0 0 calc(100vw - 64px);
     padding: 40px 32px;
+    scroll-snap-align: start;
   }
 
   .valueCard:hover {
-    transform: translateY(-8px);
+    transform: none;
+  }
+
+  .valueCard::before {
+    opacity: 0 !important;
+  }
+
+  .valueCard:hover .valueIcon {
+    color: rgba(255, 255, 255, 0.2);
+    transform: none;
   }
 
   .valueTitle {

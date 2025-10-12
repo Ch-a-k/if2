@@ -28,6 +28,7 @@
 }
 
 .mission,
+.services,
 .team {
   padding: 100px 0;
 }
@@ -70,11 +71,8 @@
   max-width: 700px;
 }
 
-.values {
-  padding: 160px 0;
-}
-
-.statsHeader {
+/* Expertise Section (02) */
+.expertiseHeader {
   display: grid;
   grid-template-columns: 200px 1fr;
   gap: 80px;
@@ -82,7 +80,7 @@
   margin-bottom: 80px;
 }
 
-.statsLabel {
+.expertiseLabel {
   font-size: 120px;
   font-weight: 800;
   color: rgba(255, 255, 255, 0.05);
@@ -90,65 +88,354 @@
   letter-spacing: -0.02em;
 }
 
-.statsTitle {
+.expertiseTitle {
   font-size: clamp(36px, 4vw, 64px);
   font-weight: 700;
   letter-spacing: -0.02em;
   padding-top: 20px;
 }
 
-.valuesGrid {
+.expertiseGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 60px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.valueItem {
-  text-align: center;
+.expertiseCard {
+  background: #000;
   padding: 60px 40px;
-  background: #0d0d0d;
-  border-radius: 12px;
-  transition: all 0.4s ease;
-}
-.valueItem:last-child {
-  background-color: #ff2a00;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.valueItem:hover {
-  transform: translateY(-8px);
-  background: #1a1a1a;
+.expertiseCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.03);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.valueNumber {
-  font-size: 72px;
+.expertiseCard:hover::before {
+  opacity: 1;
+}
+
+.expertiseCard:hover {
+  transform: scale(1.02);
+  z-index: 1;
+}
+
+.expertiseIcon {
+  font-size: 48px;
+  margin-bottom: 24px;
+  filter: grayscale(100%);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.expertiseCard:hover .expertiseIcon {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.expertiseCardTitle {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.expertiseCardDesc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Services Section (02) - Tabs Design */
+.servicesHeader {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 80px;
+  align-items: start;
+  margin-bottom: 60px;
+}
+
+.servicesLabel {
+  font-size: 120px;
   font-weight: 800;
+  color: rgba(255, 255, 255, 0.05);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.servicesIntro {
+  padding-top: 20px;
+}
+
+.servicesTitle {
+  font-size: clamp(36px, 4vw, 64px);
+  font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 16px;
 }
 
-.valueLabel {
-  font-size: 16px;
-  font-weight: 500;
+.servicesSubtitle {
+  font-size: 18px;
+  line-height: 1.6;
   color: rgba(255, 255, 255, 0.6);
-  letter-spacing: 0.05em;
+}
+
+/* Tabs */
+.tabsWrapper {
+  margin-bottom: 80px;
+}
+
+.tabs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 48px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px 32px;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.tabActive {
+  background: #ff2a00;
+  color: #ffffff;
+}
+
+.tabIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabLabel {
+  white-space: nowrap;
+}
+
+/* Services Cards */
+.tabContent {
+  min-height: 300px;
+}
+
+.servicesCards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.serviceCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 32px 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.serviceCard:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: #ff2a00;
+  transform: translateY(-4px);
+}
+
+.serviceCardIcon {
+  line-height: 1;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.serviceCard:hover .serviceCardIcon {
+  opacity: 1;
+  transform: scale(1.1);
+  color: #ff2a00;
+}
+
+.serviceCardName {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Stats Bar */
+.statsBar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.statItem {
+  background: #000;
+  padding: 40px 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.statItem:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.statNumber {
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.statLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Impact Section (04) */
+.impact {
+  padding: 160px 0;
+}
+
+.impactHeader {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 80px;
+  align-items: start;
+  margin-bottom: 80px;
+}
+
+.impactLabel {
+  font-size: 120px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.05);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.impactTitle {
+  font-size: clamp(36px, 4vw, 64px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  padding-top: 20px;
+}
+
+/* Stats Bar in Impact Section */
+.statsBar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.statItem {
+  background: #000;
+  padding: 60px 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.statItem:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.statNumber {
+  font-size: 64px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.statLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 @media (max-width: 1024px) {
   .missionGrid,
   .teamGrid,
-  .statsHeader {
+  .expertiseHeader,
+  .impactHeader {
     grid-template-columns: 1fr;
     gap: 40px;
   }
 
   .missionLabel,
   .teamLabel,
-  .statsLabel {
+  .expertiseLabel,
+  .servicesLabel,
+  .impactLabel {
     font-size: 80px;
   }
 
-  .statsHeader {
+  .expertiseHeader,
+  .servicesHeader,
+  .impactHeader {
     margin-bottom: 60px;
+  }
+
+  .expertiseGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .tabs {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .servicesCards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .statsBar {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -166,28 +453,83 @@
   }
 
   .mission,
+  .services,
   .team {
     padding: 60px 0;
   }
 
-  .values {
+  .impact {
     padding: 100px 0;
   }
 
-  .statsHeader {
+  .expertiseHeader,
+  .servicesHeader,
+  .impactHeader {
     margin-bottom: 48px;
   }
 
-  .valuesGrid {
+  .expertiseGrid {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 1px;
   }
 
-  .valueItem {
-    padding: 40px 28px;
+  .expertiseCard {
+    padding: 32px 24px;
   }
 
-  .valueNumber {
-    font-size: 56px;
+  .tabs {
+    padding: 6px;
+    gap: 8px;
+  }
+
+  .tab {
+    padding: 16px 20px;
+    font-size: 14px;
+  }
+
+  .tabLabel {
+    display: none;
+  }
+
+  .servicesCards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .serviceCard {
+    padding: 24px 16px;
+  }
+
+  .serviceCardIcon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .serviceCardName {
+    font-size: 13px;
+  }
+
+  .statsBar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .statItem {
+    padding: 32px 16px;
+  }
+
+  .statNumber {
+    font-size: 36px;
+  }
+
+  .statsBar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .statItem {
+    padding: 40px 16px;
+  }
+
+  .statNumber {
+    font-size: 48px;
   }
 }

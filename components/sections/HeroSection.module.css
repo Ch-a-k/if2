@@ -67,7 +67,7 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  background: #000000;
+  background: #ff2a00;
   color: #ffffff;
   padding: 20px 36px;
   border-radius: 12px;
@@ -114,7 +114,7 @@
 
 .primaryButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px #ff2a00;
 }
 
 .primaryButton svg {

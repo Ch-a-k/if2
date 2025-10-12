@@ -71,6 +71,10 @@ export default function ValuesSection() {
           ))}
         </div>
       </div>
+
+      <div className={styles.dragHint}>
+        <span>← Drag to explore →</span>
+      </div>
     </section>
   );
 }

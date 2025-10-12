@@ -74,6 +74,10 @@ export default function ApproachSection() {
           <h2 className={styles.sectionTitle}>Our Approach</h2>
         </div>
       </div>
+
+      <div className={styles.dragHint}>
+        <span>← Drag to explore →</span>
+      </div>
     </section>
   );
 }

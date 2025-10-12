@@ -1,7 +1,6 @@
-'use client';
-
 import styles from './page.module.css';
 import TeamSection from '@/components/TeamSection';
+import ServicesTabsSection from '@/components/ServicesTabsSection';
 
 export default function AboutPage() {
   return (
@@ -10,7 +9,7 @@ export default function AboutPage() {
         <div className={styles.container}>
           <h1 className={styles.title}>About IN-FOMO.</h1>
           <p className={styles.description}>
-            We are a team of passionate developers, designers, and strategists dedicated to creating exceptional digital experiences.
+            We build digital products that matter. From startups to enterprises, we transform ideas into exceptional experiences.
           </p>
         </div>
       </section>
@@ -22,47 +21,39 @@ export default function AboutPage() {
             <div className={styles.missionContent}>
               <h2 className={styles.missionTitle}>Our Mission</h2>
               <p className={styles.missionText}>
-                To empower businesses with innovative technology solutions that drive growth and create lasting impact.
+                Empowering businesses with innovative technology that drives real growth and creates measurable impact.
               </p>
             </div>
           </div>
         </div>
       </section>
 
+      <ServicesTabsSection />
+
       <TeamSection />
 
-      <section className={styles.values}>
+      <section className={styles.impact}>
         <div className={styles.container}>
-          <div className={styles.statsHeader}>
-            <div className={styles.statsLabel}>04</div>
-            <h2 className={styles.statsTitle}>Our Impact</h2>
+          <div className={styles.impactHeader}>
+            <div className={styles.impactLabel}>04</div>
+            <h2 className={styles.impactTitle}>Our Impact</h2>
           </div>
-          <div className={styles.valuesGrid}>
-            <div className={styles.valueItem}>
-              <div className={styles.valueNumber}>100+</div>
-              <div className={styles.valueLabel}>Projects Delivered</div>
+          <div className={styles.statsBar}>
+            <div className={styles.statItem}>
+              <div className={styles.statNumber}>150+</div>
+              <div className={styles.statLabel}>Projects</div>
             </div>
-            <div className={styles.valueItem}>
-              <div className={styles.valueNumber}>50+</div>
-              <div className={styles.valueLabel}>Happy Clients</div>
+            <div className={styles.statItem}>
+              <div className={styles.statNumber}>50+</div>
+              <div className={styles.statLabel}>Clients</div>
             </div>
-            <div className={styles.valueItem}>
-              <div className={styles.valueNumber}>$200k</div>
-              <div className={styles.valueLabel}>Attracted investments</div>
+            <div className={styles.statItem}>
+              <div className={styles.statNumber}>5★</div>
+              <div className={styles.statLabel}>Clutch Rating</div>
             </div>
-            <div className={styles.valueItem}>
-              <div className={styles.valueNumber}>4</div>
-              <div className={styles.valueLabel}>Offices in Europe and USA</div>
-            </div>
-
-            <div className={styles.valueItem}>
-              <div className={styles.valueNumber}>10+</div>
-              <div className={styles.valueLabel}>Years Experience</div>
-            </div>
-
-            <div className={styles.valueItem}>
-              <div className={styles.valueNumber}>5</div>
-              <div className={styles.valueLabel}>Stars on Clutch.co</div>
+            <div className={styles.statItem}>
+              <div className={styles.statNumber}>10+</div>
+              <div className={styles.statLabel}>Years</div>
             </div>
           </div>
         </div>

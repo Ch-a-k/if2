@@ -234,39 +234,120 @@
 
 @media (max-width: 768px) {
   .blogPage {
-    padding-top: 100px;
+    padding-top: 80px;
   }
 
   .container {
-    padding: 0 24px;
+    padding: 0 20px;
   }
 
   .hero {
-    padding: 60px 0 100px;
+    padding: 40px 0 60px;
+  }
+
+  .title {
+    margin-bottom: 20px;
   }
 
   .posts {
-    padding: 0 0 100px;
+    padding: 0 0 80px;
   }
 
   .grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 16px;
+  }
+
+  .postCard {
+    border-radius: 16px;
+  }
+
+  .postCard:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .postCard::before {
+    opacity: 0 !important;
   }
 
   .imageWrapper {
-    height: 220px;
+    height: 180px;
+    display: none;
+  }
+
+  .imageWrapper::after {
+    opacity: 0 !important;
+  }
+
+  .postCard:hover .postImage {
+    transform: none;
+    filter: none;
   }
 
   .postContent {
-    padding: 24px;
+    padding: 20px;
+  }
+
+  .postMeta {
+    margin-bottom: 12px;
+    gap: 8px;
+  }
+
+  .category {
+    font-size: 10px;
+    padding: 4px 10px;
+  }
+
+  .readTime {
+    font-size: 12px;
   }
 
   .postTitle {
-    font-size: 20px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    -webkit-line-clamp: 2;
   }
 
   .postExcerpt {
     font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    -webkit-line-clamp: 2;
+  }
+
+  .postFooter {
+    padding-top: 16px;
+  }
+
+  .date {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .hero {
+    padding: 32px 0 48px;
+  }
+
+  .imageWrapper {
+    height: 160px;
+  }
+
+  .postContent {
+    padding: 16px;
+  }
+
+  .postTitle {
+    font-size: 16px;
+  }
+
+  .postExcerpt {
+    font-size: 13px;
+    -webkit-line-clamp: 2;
   }
 }

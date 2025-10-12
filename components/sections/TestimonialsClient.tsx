@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import styles from './TestimonialsSection.module.css';
 import Image from 'next/image';
 import type { TestimonialNew } from '@/lib/sanity';
@@ -44,17 +44,69 @@ function convertToEmbedUrl(url: string): string {
 
 export default function TestimonialsClient({ testimonials }: TestimonialsClientProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [translateX, setTranslateX] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   if (testimonials.length === 0) {
     return null;
   }
 
-  const nextTestimonial = () => {
-    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+  const handleDragStart = (clientX: number) => {
+    setIsDragging(true);
+    setStartX(clientX);
   };
 
-  const prevTestimonial = () => {
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  const handleDragMove = (clientX: number) => {
+    if (!isDragging) return;
+    const diff = clientX - startX;
+    setTranslateX(diff);
+  };
+
+  const handleDragEnd = () => {
+    setIsDragging(false);
+    
+    const threshold = 100;
+    
+    if (translateX > threshold && activeIndex > 0) {
+      setActiveIndex(prev => prev - 1);
+    } else if (translateX < -threshold && activeIndex < testimonials.length - 1) {
+      setActiveIndex(prev => prev + 1);
+    }
+    
+    setTranslateX(0);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    handleDragStart(e.clientX);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    handleDragMove(e.clientX);
+  };
+
+  const handleMouseUp = () => {
+    handleDragEnd();
+  };
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      handleDragEnd();
+    }
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    handleDragStart(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    handleDragMove(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    handleDragEnd();
   };
 
   const currentTestimonial = testimonials[activeIndex];
@@ -95,20 +147,30 @@ export default function TestimonialsClient({ testimonials }: TestimonialsClientP
         <div className={styles.header}>
           <div className={styles.label}>Testimonials</div>
           <h2 className={styles.title}>What our clients say</h2>
+          <div className={styles.dragHint}>
+            ← Drag to explore →
+          </div>
         </div>
 
-        <div className={styles.testimonialWrapper}>
-          <button 
-            className={styles.navButton} 
-            onClick={prevTestimonial}
-            aria-label="Previous testimonial"
+        <div 
+          className={styles.testimonialWrapper}
+          ref={containerRef}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div 
+            className={styles.testimonialContent}
+            style={{
+              transform: `translateX(${translateX}px)`,
+              transition: isDragging ? 'none' : 'transform 0.3s ease',
+              cursor: isDragging ? 'grabbing' : 'grab'
+            }}
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-
-          <div className={styles.testimonialContent}>
             <div className={styles.testimonialCard}>
               {mediaUrl && mediaType && (
                 <div className={styles.mediaSection}>
@@ -210,16 +272,6 @@ export default function TestimonialsClient({ testimonials }: TestimonialsClientP
               </div>
             </div>
           </div>
-
-          <button 
-            className={styles.navButton} 
-            onClick={nextTestimonial}
-            aria-label="Next testimonial"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
         </div>
 
         <div className={styles.indicators}>
