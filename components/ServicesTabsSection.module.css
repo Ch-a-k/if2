@@ -152,6 +152,15 @@
 }
 
 @media (max-width: 1024px) {
+  .servicesHeader {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .servicesLabel {
+    font-size: 80px;
+  }
+
   .tabs {
     flex-direction: column;
     gap: 12px;
@@ -170,6 +179,28 @@
 
   .container {
     padding: 0 24px;
+  }
+
+  .servicesHeader {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  .servicesLabel {
+    font-size: 80px;
+  }
+
+  .servicesIntro {
+    padding-top: 0;
+  }
+
+  .servicesTitle {
+    margin-bottom: 12px;
+  }
+
+  .servicesSubtitle {
+    font-size: 16px;
   }
 
   .tabs {

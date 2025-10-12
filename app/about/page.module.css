@@ -409,29 +409,17 @@
   .missionLabel,
   .teamLabel,
   .expertiseLabel,
-  .servicesLabel,
   .impactLabel {
     font-size: 80px;
   }
 
   .expertiseHeader,
-  .servicesHeader,
   .impactHeader {
     margin-bottom: 60px;
   }
 
   .expertiseGrid {
     grid-template-columns: 1fr;
-  }
-
-  .tabs {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .servicesCards {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
   }
 
   .statsBar {
@@ -458,12 +446,38 @@
     padding: 60px 0;
   }
 
+  .missionGrid,
+  .teamGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .missionLabel,
+  .teamLabel {
+    font-size: 80px;
+  }
+
+  .missionContent,
+  .teamContent {
+    padding-top: 0;
+  }
+
+  .missionTitle,
+  .teamTitle {
+    margin-bottom: 20px;
+  }
+
+  .missionText,
+  .teamText {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
   .impact {
     padding: 100px 0;
   }
 
   .expertiseHeader,
-  .servicesHeader,
   .impactHeader {
     margin-bottom: 48px;
   }
@@ -475,38 +489,6 @@
 
   .expertiseCard {
     padding: 32px 24px;
-  }
-
-  .tabs {
-    padding: 6px;
-    gap: 8px;
-  }
-
-  .tab {
-    padding: 16px 20px;
-    font-size: 14px;
-  }
-
-  .tabLabel {
-    display: none;
-  }
-
-  .servicesCards {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .serviceCard {
-    padding: 24px 16px;
-  }
-
-  .serviceCardIcon svg {
-    width: 28px;
-    height: 28px;
-  }
-
-  .serviceCardName {
-    font-size: 13px;
   }
 
   .statsBar {
