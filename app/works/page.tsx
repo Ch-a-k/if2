@@ -1,12 +1,52 @@
 import {Metadata} from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import {client, queries, getImageUrl, type Project} from '@/lib/sanity'
+import {client, queries, getImageUrl, getOgImageUrl, type Project, type SiteSettings} from '@/lib/sanity'
 import styles from './page.module.css'
 
-export const metadata: Metadata = {
-  title: 'Our Works | IN-FOMO. - Digital Innovation Portfolio',
-  description: 'Explore our portfolio of successful digital projects. Web development, mobile apps, Web3 solutions, and innovative digital products.',
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await client.fetch<SiteSettings>(queries.siteSettings)
+  const siteUrl = 'https://in-fomo.com'
+  
+  // Use Works page SEO settings if available, otherwise fallback to global settings
+  const ogTitle = settings?.worksPageSeo?.ogTitle || 'Our Works | IN-FOMO.';
+  const ogDescription = settings?.worksPageSeo?.ogDescription || 'Explore our portfolio of successful digital projects. Web development, mobile apps, Web3 solutions, and innovative digital products.';
+  const ogImageData = settings?.worksPageSeo?.ogImage || settings?.ogImage;
+  const ogImageUrl = ogImageData ? getOgImageUrl(ogImageData) : null;
+
+  return {
+    title: 'Our Works | IN-FOMO. - Digital Innovation Portfolio',
+    description: 'Explore our portfolio of successful digital projects. Web development, mobile apps, Web3 solutions, and innovative digital products.',
+    keywords: ['portfolio', 'case studies', 'web development projects', 'mobile apps', 'digital solutions'],
+    openGraph: {
+      title: ogTitle,
+      description: ogDescription,
+      type: 'website',
+      url: `${siteUrl}/works`,
+      siteName: 'IN-FOMO.',
+      images: ogImageUrl ? [{
+        url: ogImageUrl,
+        width: 1200,
+        height: 630,
+        alt: ogImageData?.alt || 'IN-FOMO. Portfolio - Digital Innovation Projects',
+      }] : [],
+      locale: 'en_US',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: ogTitle,
+      description: ogDescription,
+      site: '@infomo',
+      creator: '@infomo',
+      images: ogImageUrl ? [{
+        url: ogImageUrl,
+        alt: ogImageData?.alt || 'IN-FOMO. Portfolio',
+      }] : [],
+    },
+    alternates: {
+      canonical: `${siteUrl}/works`,
+    },
+  }
 }
 
 export const revalidate = 3600

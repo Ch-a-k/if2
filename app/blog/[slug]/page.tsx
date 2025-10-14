@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {notFound} from 'next/navigation'
 import {PortableText} from '@portabletext/react'
-import {client, queries, getImageUrl, type BlogPost} from '@/lib/sanity'
+import {client, queries, getImageUrl, getOgImageUrl, type BlogPost} from '@/lib/sanity'
 import ShareButtons from '@/components/blog/ShareButtons'
 import AdjacentPosts from '@/components/blog/AdjacentPosts'
 import PartnersSection from '@/components/PartnersSection'
@@ -34,7 +34,9 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
     }
   }
 
-  const imageUrl = getImageUrl(post.coverImage)
+  const ogImageUrl = getOgImageUrl(post.coverImage)
+  const siteUrl = 'https://in-fomo.com'
+  const postUrl = `${siteUrl}/blog/${post.slug.current}`
 
   return {
     title: `${post.title} | IN-FOMO. Blog`,
@@ -47,13 +49,29 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
       type: 'article',
       publishedTime: post.publishedAt,
       authors: [post.author.name],
-      images: imageUrl ? [imageUrl] : [],
+      url: postUrl,
+      siteName: 'IN-FOMO.',
+      images: ogImageUrl ? [{
+        url: ogImageUrl,
+        width: 1200,
+        height: 630,
+        alt: post.coverImage?.alt || post.title,
+      }] : [],
+      locale: 'en_US',
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.excerpt,
-      images: imageUrl ? [imageUrl] : [],
+      site: '@infomo',
+      creator: '@infomo',
+      images: ogImageUrl ? [{
+        url: ogImageUrl,
+        alt: post.coverImage?.alt || post.title,
+      }] : [],
+    },
+    alternates: {
+      canonical: postUrl,
     },
   }
 }
@@ -67,7 +85,9 @@ export default async function BlogPostPage({params}: PageProps) {
 
   const adjacentPosts = await client.fetch(queries.adjacentBlogPosts(post.publishedAt))
   const imageUrl = getImageUrl(post.coverImage)
+  const ogImageUrl = getOgImageUrl(post.coverImage)
   const authorImageUrl = post.author.image ? getImageUrl(post.author.image) : null
+  const siteUrl = 'https://in-fomo.com'
 
   // JSON-LD structured data
   const jsonLd = {
@@ -75,7 +95,7 @@ export default async function BlogPostPage({params}: PageProps) {
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
-    image: imageUrl,
+    image: ogImageUrl || imageUrl,
     datePublished: post.publishedAt,
     dateModified: post.publishedAt,
     author: {
@@ -88,8 +108,12 @@ export default async function BlogPostPage({params}: PageProps) {
       name: 'IN-FOMO.',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://in-fomo.com/logo.png',
+        url: `${siteUrl}/logo.png`,
       },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${siteUrl}/blog/${post.slug.current}`,
     },
   }
 

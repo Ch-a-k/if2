@@ -23,6 +23,19 @@ export function getImageUrl(image: any): string | null {
   return urlFor(image).url()
 }
 
+// Helper function to get OG image URL with proper dimensions
+export function getOgImageUrl(image: any): string | null {
+  if (!image) return null
+  if (!image.asset) return null
+  return urlFor(image)
+    .width(1200)
+    .height(630)
+    .fit('crop')
+    .format('jpg')
+    .quality(90)
+    .url()
+}
+
 export function getFileUrl(file: any): string | null {
   if (!file) return null
   if (!file.asset) return null
@@ -131,6 +144,7 @@ export interface Project {
       _ref: string
       _type: 'reference'
     }
+    alt?: string
   }
   logo?: {
     asset: {
@@ -243,6 +257,18 @@ export interface BlogPost {
   featured: boolean
 }
 
+export interface PageSeo {
+  ogTitle?: string
+  ogDescription?: string
+  ogImage?: {
+    asset: {
+      _ref: string
+      _type: 'reference'
+    }
+    alt?: string
+  }
+}
+
 export interface SiteSettings {
   _id: string
   title: string
@@ -265,6 +291,11 @@ export interface SiteSettings {
   hotjarId?: number
   telegramBotToken?: string
   telegramChatId?: string
+  homePageSeo?: PageSeo
+  aboutPageSeo?: PageSeo
+  worksPageSeo?: PageSeo
+  blogPageSeo?: PageSeo
+  contactPageSeo?: PageSeo
 }
 
 // Queries

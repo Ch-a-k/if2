@@ -74,6 +74,197 @@ export default {
       description: 'Telegram group/channel Chat ID (with minus for groups)',
       placeholder: '-1001234567890',
     },
+    // Page-specific SEO settings
+    {
+      name: 'homePageSeo',
+      title: '🏠 Home Page SEO',
+      type: 'object',
+      description: 'SEO settings for the home page',
+      fields: [
+        {
+          name: 'ogTitle',
+          title: 'OG Title',
+          type: 'string',
+          description: 'Open Graph title (for social media sharing)',
+        },
+        {
+          name: 'ogDescription',
+          title: 'OG Description',
+          type: 'text',
+          rows: 3,
+          description: 'Open Graph description (for social media sharing)',
+          validation: (Rule: any) => Rule.max(160),
+        },
+        {
+          name: 'ogImage',
+          title: 'OG Image',
+          type: 'image',
+          description: 'Open Graph image (1200x630px recommended)',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            {
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'aboutPageSeo',
+      title: '👥 About Page SEO',
+      type: 'object',
+      description: 'SEO settings for the About page',
+      fields: [
+        {
+          name: 'ogTitle',
+          title: 'OG Title',
+          type: 'string',
+          description: 'Open Graph title (for social media sharing)',
+        },
+        {
+          name: 'ogDescription',
+          title: 'OG Description',
+          type: 'text',
+          rows: 3,
+          description: 'Open Graph description (for social media sharing)',
+          validation: (Rule: any) => Rule.max(160),
+        },
+        {
+          name: 'ogImage',
+          title: 'OG Image',
+          type: 'image',
+          description: 'Open Graph image (1200x630px recommended)',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            {
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'worksPageSeo',
+      title: '💼 Works Page SEO',
+      type: 'object',
+      description: 'SEO settings for the Works/Portfolio page',
+      fields: [
+        {
+          name: 'ogTitle',
+          title: 'OG Title',
+          type: 'string',
+          description: 'Open Graph title (for social media sharing)',
+        },
+        {
+          name: 'ogDescription',
+          title: 'OG Description',
+          type: 'text',
+          rows: 3,
+          description: 'Open Graph description (for social media sharing)',
+          validation: (Rule: any) => Rule.max(160),
+        },
+        {
+          name: 'ogImage',
+          title: 'OG Image',
+          type: 'image',
+          description: 'Open Graph image (1200x630px recommended)',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            {
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'blogPageSeo',
+      title: '📝 Blog Page SEO',
+      type: 'object',
+      description: 'SEO settings for the Blog page',
+      fields: [
+        {
+          name: 'ogTitle',
+          title: 'OG Title',
+          type: 'string',
+          description: 'Open Graph title (for social media sharing)',
+        },
+        {
+          name: 'ogDescription',
+          title: 'OG Description',
+          type: 'text',
+          rows: 3,
+          description: 'Open Graph description (for social media sharing)',
+          validation: (Rule: any) => Rule.max(160),
+        },
+        {
+          name: 'ogImage',
+          title: 'OG Image',
+          type: 'image',
+          description: 'Open Graph image (1200x630px recommended)',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            {
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'contactPageSeo',
+      title: '📧 Contact Page SEO',
+      type: 'object',
+      description: 'SEO settings for the Contact page',
+      fields: [
+        {
+          name: 'ogTitle',
+          title: 'OG Title',
+          type: 'string',
+          description: 'Open Graph title (for social media sharing)',
+        },
+        {
+          name: 'ogDescription',
+          title: 'OG Description',
+          type: 'text',
+          rows: 3,
+          description: 'Open Graph description (for social media sharing)',
+          validation: (Rule: any) => Rule.max(160),
+        },
+        {
+          name: 'ogImage',
+          title: 'OG Image',
+          type: 'image',
+          description: 'Open Graph image (1200x630px recommended)',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            {
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+    },
   ],
   preview: {
     select: {

@@ -1,17 +1,52 @@
 import {Metadata} from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import {client, queries, getImageUrl, type BlogPost} from '@/lib/sanity'
+import {client, queries, getImageUrl, getOgImageUrl, type BlogPost, type SiteSettings} from '@/lib/sanity'
 import styles from './page.module.css'
 
-export const metadata: Metadata = {
-  title: 'Blog | IN-FOMO. - Digital Innovation Insights',
-  description: 'Expert insights on web development, mobile apps, Web3, and digital innovation. Stay updated with the latest trends and best practices.',
-  openGraph: {
-    title: 'Blog | IN-FOMO.',
-    description: 'Expert insights on web development, mobile apps, Web3, and digital innovation.',
-    type: 'website',
-  },
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await client.fetch<SiteSettings>(queries.siteSettings)
+  const siteUrl = 'https://in-fomo.com'
+  
+  // Use Blog page SEO settings if available, otherwise fallback to global settings
+  const ogTitle = settings?.blogPageSeo?.ogTitle || 'Blog | IN-FOMO.';
+  const ogDescription = settings?.blogPageSeo?.ogDescription || 'Expert insights on web development, mobile apps, Web3, and digital innovation. Stay updated with the latest trends and best practices.';
+  const ogImageData = settings?.blogPageSeo?.ogImage || settings?.ogImage;
+  const ogImageUrl = ogImageData ? getOgImageUrl(ogImageData) : null;
+
+  return {
+    title: 'Blog | IN-FOMO. - Digital Innovation Insights',
+    description: 'Expert insights on web development, mobile apps, Web3, and digital innovation. Stay updated with the latest trends and best practices.',
+    keywords: ['web development', 'mobile apps', 'Web3', 'digital innovation', 'technology blog', 'software development'],
+    openGraph: {
+      title: ogTitle,
+      description: ogDescription,
+      type: 'website',
+      url: `${siteUrl}/blog`,
+      siteName: 'IN-FOMO.',
+      images: ogImageUrl ? [{
+        url: ogImageUrl,
+        width: 1200,
+        height: 630,
+        alt: ogImageData?.alt || 'IN-FOMO. Blog - Digital Innovation Insights',
+      }] : [],
+      locale: 'en_US',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: ogTitle,
+      description: ogDescription,
+      site: '@infomo',
+      creator: '@infomo',
+      images: ogImageUrl ? [{
+        url: ogImageUrl,
+        alt: ogImageData?.alt || 'IN-FOMO. Blog',
+      }] : [],
+    },
+    alternates: {
+      canonical: `${siteUrl}/blog`,
+    },
+  }
 }
 
 export const revalidate = 3600

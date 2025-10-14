@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {notFound} from 'next/navigation'
 import {PortableText} from '@portabletext/react'
-import {client, queries, getImageUrl, type Project} from '@/lib/sanity'
+import {client, queries, getImageUrl, getOgImageUrl, type Project} from '@/lib/sanity'
 import PartnersSection from '@/components/PartnersSection'
 import ContactForm from '@/components/blog/ContactForm'
 import ProjectGallery from '@/components/ProjectGallery'
@@ -33,15 +33,41 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
     }
   }
 
-  const imageUrl = getImageUrl(project.coverImage)
+  const ogImageUrl = getOgImageUrl(project.coverImage)
+  const siteUrl = 'https://in-fomo.com'
+  const projectUrl = `${siteUrl}/works/${project.slug.current}`
 
   return {
     title: `${project.title} | IN-FOMO. Portfolio`,
     description: project.excerpt,
+    keywords: project.tags,
     openGraph: {
       title: project.title,
       description: project.excerpt,
-      images: imageUrl ? [imageUrl] : [],
+      type: 'article',
+      url: projectUrl,
+      siteName: 'IN-FOMO.',
+      images: ogImageUrl ? [{
+        url: ogImageUrl,
+        width: 1200,
+        height: 630,
+        alt: project.coverImage?.alt || project.title,
+      }] : [],
+      locale: 'en_US',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: project.title,
+      description: project.excerpt,
+      site: '@infomo',
+      creator: '@infomo',
+      images: ogImageUrl ? [{
+        url: ogImageUrl,
+        alt: project.coverImage?.alt || project.title,
+      }] : [],
+    },
+    alternates: {
+      canonical: projectUrl,
     },
   }
 }
@@ -87,8 +113,8 @@ export default async function ProjectPage({params}: PageProps) {
 
       {/* Hero Image */}
       {heroImageUrl && (
-        <section className={styles.mainImage}>
-          <div className={styles.container}>
+      <section className={styles.mainImage}>
+        <div className={styles.container}>
             <div className={styles.heroImageWrapper}>
               <Image
                 src={heroImageUrl}
@@ -98,20 +124,20 @@ export default async function ProjectPage({params}: PageProps) {
                 className={styles.heroImage}
                 priority
               />
-            </div>
           </div>
-        </section>
+        </div>
+      </section>
       )}
 
       {/* Services Marquee */}
       {project.services && project.services.length > 0 && (
-        <section className={styles.servicesMarquee}>
-          <div className={styles.marqueeTrack}>
-            {[...project.services, ...project.services, ...project.services].map((service, index) => (
-              <span key={index} className={styles.serviceItem}>{service}</span>
-            ))}
-          </div>
-        </section>
+      <section className={styles.servicesMarquee}>
+        <div className={styles.marqueeTrack}>
+          {[...project.services, ...project.services, ...project.services].map((service, index) => (
+            <span key={index} className={styles.serviceItem}>{service}</span>
+          ))}
+        </div>
+      </section>
       )}
 
       {/* Description */}
@@ -125,27 +151,27 @@ export default async function ProjectPage({params}: PageProps) {
 
       {/* Process */}
       {project.process && project.process.length > 0 && (
-        <section className={styles.process}>
-          <div className={styles.container}>
-            <h2 className={styles.sectionTitle}>Our Process</h2>
-            <div className={styles.processGrid}>
-              {project.process.map((step, index) => (
-                <div key={index} className={styles.processCard}>
-                  <div className={styles.processIcon}>{step.icon}</div>
-                  <h3 className={styles.processTitle}>{step.title}</h3>
-                  <p className={styles.processDescription}>{step.description}</p>
-                </div>
-              ))}
-            </div>
+      <section className={styles.process}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>Our Process</h2>
+          <div className={styles.processGrid}>
+            {project.process.map((step, index) => (
+              <div key={index} className={styles.processCard}>
+                <div className={styles.processIcon}>{step.icon}</div>
+                <h3 className={styles.processTitle}>{step.title}</h3>
+                <p className={styles.processDescription}>{step.description}</p>
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
       )}
 
       {/* Gallery */}
       {project.gallery && project.gallery.length > 0 && (
-        <section className={styles.gallery}>
-          <div className={styles.container}>
-            <h2 className={styles.sectionTitle}>Project Gallery</h2>
+      <section className={styles.gallery}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>Project Gallery</h2>
             <ProjectGallery
               images={project.gallery.map((item, index) => ({
                 url: getImageUrl(item) || '/placeholder.svg',
@@ -154,14 +180,14 @@ export default async function ProjectPage({params}: PageProps) {
               }))}
               projectTitle={project.title}
             />
-          </div>
-        </section>
+        </div>
+      </section>
       )}
 
       {/* Live Link */}
       {project.link && (
         <section className={styles.linkSection}>
-          <div className={styles.container}>
+        <div className={styles.container}>
             <a
               href={project.link}
               target="_blank"
@@ -169,12 +195,12 @@ export default async function ProjectPage({params}: PageProps) {
               className={styles.liveLink}
             >
               <span>Visit Live Project</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
             </a>
-          </div>
-        </section>
+        </div>
+      </section>
       )}
 
       {/* Partners */}

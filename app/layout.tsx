@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
 import GoogleTagManager from '@/components/GoogleTagManager';
 import Analytics from '@/components/Analytics';
-import { client, queries, getImageUrl } from '@/lib/sanity';
+import { client, queries, getOgImageUrl } from '@/lib/sanity';
 
 export async function generateMetadata() {
   try {
@@ -12,7 +12,11 @@ export async function generateMetadata() {
       next: { revalidate: 3600 } // Cache for 1 hour
     });
 
-    const ogImageUrl = settings?.ogImage ? getImageUrl(settings.ogImage) : null;
+    // Use home page SEO settings if available, otherwise fallback to global settings
+    const ogTitle = settings?.homePageSeo?.ogTitle || settings?.title || 'IN-FOMO. - Digital Solutions That Matter';
+    const ogDescription = settings?.homePageSeo?.ogDescription || settings?.description || 'IN-FOMO. builds innovative solutions for forward-thinking businesses.';
+    const ogImageData = settings?.homePageSeo?.ogImage || settings?.ogImage;
+    const ogImageUrl = ogImageData ? getOgImageUrl(ogImageData) : null;
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://in-fomo.com';
 
     return {
@@ -21,26 +25,32 @@ export async function generateMetadata() {
         template: '%s | IN-FOMO.'
       },
       description: settings?.description || 'IN-FOMO. builds innovative solutions for forward-thinking businesses. From web and mobile apps to comprehensive digital strategies.',
+      keywords: ['digital agency', 'web development', 'mobile apps', 'Web3', 'blockchain', 'digital innovation', 'software development'],
       metadataBase: new URL(siteUrl),
       openGraph: {
         type: 'website',
         locale: 'en_US',
         url: siteUrl,
-        title: settings?.title || 'IN-FOMO. - Digital Solutions That Matter',
-        description: settings?.description || 'IN-FOMO. builds innovative solutions for forward-thinking businesses.',
+        title: ogTitle,
+        description: ogDescription,
         siteName: 'IN-FOMO.',
         images: ogImageUrl ? [{
           url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: settings?.ogImage?.alt || 'IN-FOMO. - Digital Solutions'
+          alt: ogImageData?.alt || 'IN-FOMO. - Digital Solutions'
         }] : [],
       },
       twitter: {
         card: 'summary_large_image',
-        title: settings?.title || 'IN-FOMO. - Digital Solutions That Matter',
-        description: settings?.description || 'IN-FOMO. builds innovative solutions for forward-thinking businesses.',
-        images: ogImageUrl ? [ogImageUrl] : [],
+        title: ogTitle,
+        description: ogDescription,
+        site: '@infomo',
+        creator: '@infomo',
+        images: ogImageUrl ? [{
+          url: ogImageUrl,
+          alt: ogImageData?.alt || 'IN-FOMO. - Digital Solutions'
+        }] : [],
       },
       icons: {
         icon: [
@@ -51,7 +61,6 @@ export async function generateMetadata() {
       },
     };
   } catch (error) {
-    console.error('Error fetching metadata:', error);
     // Return default metadata if fetch fails
     return {
       title: 'IN-FOMO. - Digital Solutions That Matter',
