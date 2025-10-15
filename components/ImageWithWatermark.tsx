@@ -1,8 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import { client, queries, getImageUrl, getWatermarkPositionClass, type WatermarkSettings } from '@/lib/sanity';
+import { getWatermarkPositionClass, type WatermarkSettings } from '@/lib/sanity';
 import styles from './ImageWithWatermark.module.css';
 
 interface ImageWithWatermarkProps {
@@ -11,6 +10,7 @@ interface ImageWithWatermarkProps {
   width: number;
   height: number;
   watermark?: WatermarkSettings;
+  watermarkLogoUrl?: string | null;
   className?: string;
   priority?: boolean;
   fill?: boolean;
@@ -22,34 +22,16 @@ export default function ImageWithWatermark({
   width,
   height,
   watermark,
+  watermarkLogoUrl,
   className = '',
   priority = false,
   fill = false,
 }: ImageWithWatermarkProps) {
-  const [watermarkLogoUrl, setWatermarkLogoUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Fetch watermark logo from site settings
-    const fetchWatermarkLogo = async () => {
-      try {
-        const settings = await client.fetch(queries.siteSettings);
-        if (settings?.watermarkLogo) {
-          const logoUrl = getImageUrl(settings.watermarkLogo);
-          setWatermarkLogoUrl(logoUrl);
-        }
-      } catch (error) {
-        console.error('Failed to fetch watermark logo:', error);
-      }
-    };
-
-    fetchWatermarkLogo();
-  }, []);
-
   const position = watermark?.position || 'center';
   const opacity = watermark?.opacity !== undefined ? watermark.opacity : 25;
   const positionClass = getWatermarkPositionClass(position);
 
-  const shouldShowWatermark = watermarkLogoUrl && (watermark || true); // Show by default if logo exists
+  const shouldShowWatermark = watermarkLogoUrl;
 
   return (
     <div className={`${styles.imageContainer} ${className}`}>
