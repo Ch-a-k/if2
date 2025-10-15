@@ -36,6 +36,15 @@ export default {
       ],
     },
     {
+      name: 'watermarkLogo',
+      title: 'Watermark Logo',
+      type: 'image',
+      description: 'Logo to use as watermark on images (PNG with transparency recommended)',
+      options: {
+        hotspot: false,
+      },
+    },
+    {
       name: 'favicon',
       title: 'Favicon',
       type: 'image',

@@ -5,7 +5,12 @@ import {client, queries, getImageUrl, getOgImageUrl, type BlogPost, type SiteSet
 import styles from './page.module.css'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await client.fetch<SiteSettings>(queries.siteSettings)
+  const settings = await client.fetch<SiteSettings>(queries.siteSettings, {}, {
+    next: { 
+      revalidate: 3600,
+      tags: ['siteSettings', 'blog-seo']
+    }
+  })
   const siteUrl = 'https://in-fomo.com'
   
   // Use Blog page SEO settings if available, otherwise fallback to global settings

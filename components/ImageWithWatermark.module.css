@@ -1,0 +1,101 @@
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.watermark {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+.watermarkImage {
+  width: auto;
+  height: auto;
+  max-width: 150px;
+  max-height: 150px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Position classes */
+.watermark-top-left {
+  top: 20px;
+  left: 20px;
+}
+
+.watermark-top-right {
+  top: 20px;
+  right: 20px;
+}
+
+.watermark-bottom-left {
+  bottom: 20px;
+  left: 20px;
+}
+
+.watermark-bottom-right {
+  bottom: 20px;
+  right: 20px;
+}
+
+.watermark-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.watermark-center .watermarkImage {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .watermarkImage {
+    max-width: 100px;
+    max-height: 100px;
+  }
+  
+  .watermark-center .watermarkImage {
+    max-width: 120px;
+    max-height: 120px;
+  }
+  
+  .watermark-top-left,
+  .watermark-top-right,
+  .watermark-bottom-left,
+  .watermark-bottom-right {
+    padding: 10px;
+  }
+  
+  .watermark-top-left {
+    top: 10px;
+    left: 10px;
+  }
+  
+  .watermark-top-right {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .watermark-bottom-left {
+    bottom: 10px;
+    left: 10px;
+  }
+  
+  .watermark-bottom-right {
+    bottom: 10px;
+    right: 10px;
+  }
+}
+

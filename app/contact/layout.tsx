@@ -2,7 +2,12 @@ import {Metadata} from 'next';
 import {client, queries, getOgImageUrl, type SiteSettings} from '@/lib/sanity';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await client.fetch<SiteSettings>(queries.siteSettings);
+  const settings = await client.fetch<SiteSettings>(queries.siteSettings, {}, {
+    next: { 
+      revalidate: 3600,
+      tags: ['siteSettings', 'contact-seo']
+    }
+  });
   const siteUrl = 'https://in-fomo.com';
   
   // Use Contact page SEO settings if available, otherwise fallback to global settings

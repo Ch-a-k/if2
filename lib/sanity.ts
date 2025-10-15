@@ -36,6 +36,23 @@ export function getOgImageUrl(image: any): string | null {
     .url()
 }
 
+// Helper function to get watermark CSS position class
+export function getWatermarkPositionClass(position?: string): string {
+  switch (position) {
+    case 'top-left':
+      return 'watermark-top-left'
+    case 'top-right':
+      return 'watermark-top-right'
+    case 'bottom-left':
+      return 'watermark-bottom-left'
+    case 'bottom-right':
+      return 'watermark-bottom-right'
+    case 'center':
+    default:
+      return 'watermark-center'
+  }
+}
+
 export function getFileUrl(file: any): string | null {
   if (!file) return null
   if (!file.asset) return null
@@ -145,6 +162,7 @@ export interface Project {
       _type: 'reference'
     }
     alt?: string
+    watermark?: WatermarkSettings
   }
   logo?: {
     asset: {
@@ -157,6 +175,8 @@ export interface Project {
       _ref: string
       _type: 'reference'
     }
+    alt?: string
+    watermark?: WatermarkSettings
   }
   services?: string[]
   gallery?: {
@@ -166,6 +186,7 @@ export interface Project {
     }
     alt?: string
     wide?: boolean
+    watermark?: WatermarkSettings
   }[]
   process?: {
     icon: string
@@ -247,6 +268,7 @@ export interface BlogPost {
       _type: 'reference'
     }
     alt: string
+    watermark?: WatermarkSettings
   }
   author: Author
   category: Category
@@ -255,6 +277,11 @@ export interface BlogPost {
   readTime?: number
   publishedAt: string
   featured: boolean
+}
+
+export interface WatermarkSettings {
+  position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center'
+  opacity?: number
 }
 
 export interface PageSeo {
@@ -279,6 +306,12 @@ export interface SiteSettings {
       _type: 'reference'
     }
     alt?: string
+  }
+  watermarkLogo?: {
+    asset: {
+      _ref: string
+      _type: 'reference'
+    }
   }
   favicon?: {
     asset: {

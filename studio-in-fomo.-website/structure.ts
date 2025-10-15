@@ -22,6 +22,7 @@ export const structure = (S: StructureBuilder) =>
                   S.documentList()
                     .title('Featured Projects')
                     .filter('_type == "project" && featured == true')
+                    .apiVersion('2024-01-01')
                 ),
             ])
         ),
@@ -48,6 +49,7 @@ export const structure = (S: StructureBuilder) =>
                   S.documentList()
                     .title('Featured Posts')
                     .filter('_type == "blogPost" && featured == true')
+                    .apiVersion('2024-01-01')
                 ),
             ])
         ),

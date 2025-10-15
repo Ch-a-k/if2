@@ -42,6 +42,18 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
+        },
+        {
+          name: 'watermark',
+          type: 'watermarkSettings',
+          title: 'Watermark Settings',
+        },
+      ],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -59,6 +71,18 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
+        },
+        {
+          name: 'watermark',
+          type: 'watermarkSettings',
+          title: 'Watermark Settings',
+        },
+      ],
       description: 'Large hero image for project page',
     }),
     defineField({
@@ -87,6 +111,11 @@ export default defineType({
               type: 'boolean',
               title: 'Wide layout (2 columns)',
               initialValue: false,
+            },
+            {
+              name: 'watermark',
+              type: 'watermarkSettings',
+              title: 'Watermark Settings',
             },
           ],
         },

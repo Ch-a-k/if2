@@ -25,7 +25,7 @@ export default function Header() {
               <span>About Us</span>
             </Link>
             <Link href="/works" className={styles.navLink}>
-              <span>Works</span>
+              <span>Examples</span>
             </Link>
             <Link href="/blog" className={styles.navLink}>
               <span>Blog</span>
@@ -62,7 +62,7 @@ export default function Header() {
             About Us
           </Link>
           <Link href="/works" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>
-            Works
+            Examples
           </Link>
           <Link href="/blog" className={styles.mobileNavLink} onClick={() => setIsMenuOpen(false)}>
             Blog

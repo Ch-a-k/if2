@@ -9,7 +9,10 @@ import { client, queries, getOgImageUrl } from '@/lib/sanity';
 export async function generateMetadata() {
   try {
     const settings = await client.fetch(queries.siteSettings, {}, {
-      next: { revalidate: 3600 } // Cache for 1 hour
+      next: { 
+        revalidate: 3600,
+        tags: ['siteSettings', 'home-seo']
+      }
     });
 
     // Use home page SEO settings if available, otherwise fallback to global settings

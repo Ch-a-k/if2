@@ -13,7 +13,7 @@ export default async function WorksSection() {
       <div className={styles.container}>
         <div className={styles.header}>
           <div>
-            <div className={styles.sectionSubheading}>Works</div>
+            <div className={styles.sectionSubheading}>Examples</div>
             <h2 className={styles.sectionTitle}>Featured projects</h2>
           </div>
           <Link href="/works" className={styles.allCasesButton}>

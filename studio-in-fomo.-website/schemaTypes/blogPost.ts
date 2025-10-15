@@ -106,6 +106,11 @@ export default defineType({
           title: 'Alternative text',
           validation: (Rule) => Rule.required(),
         },
+        {
+          name: 'watermark',
+          type: 'watermarkSettings',
+          title: 'Watermark Settings',
+        },
       ],
       validation: (Rule) => Rule.required(),
     }),

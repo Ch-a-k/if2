@@ -1,4 +1,4 @@
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import { NextResponse } from 'next/server'
 
 export async function POST() {
@@ -12,6 +12,14 @@ export async function POST() {
     revalidatePath('/blog')
     revalidatePath('/blog/[slug]', 'page')
     revalidatePath('/contact')
+
+    // Ревалидируем теги для более гранулярного контроля
+    revalidateTag('siteSettings')
+    revalidateTag('home-seo')
+    revalidateTag('about-seo')
+    revalidateTag('works-seo')
+    revalidateTag('blog-seo')
+    revalidateTag('contact-seo')
 
     const response = NextResponse.json({
       revalidated: true,

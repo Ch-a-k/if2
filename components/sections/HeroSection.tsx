@@ -56,7 +56,7 @@ export default function HeroSection() {
               </svg>
             </a>
             <a href="/works" className={styles.secondaryButton}>
-              <span>View Our Works</span>
+              <span>View Examples</span>
             </a>
           </div>
         </div>

@@ -5,7 +5,12 @@ import TeamSection from '@/components/TeamSection';
 import ServicesTabsSection from '@/components/ServicesTabsSection';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await client.fetch<SiteSettings>(queries.siteSettings);
+  const settings = await client.fetch<SiteSettings>(queries.siteSettings, {}, {
+    next: { 
+      revalidate: 3600,
+      tags: ['siteSettings', 'about-seo']
+    }
+  });
   const siteUrl = 'https://in-fomo.com';
   
   // Use About page SEO settings if available, otherwise fallback to global settings

@@ -90,7 +90,7 @@ export default async function ProjectPage({params}: PageProps) {
           <div className={styles.breadcrumbs}>
             <Link href="/">Home</Link>
             <span>/</span>
-            <Link href="/works">Works</Link>
+            <Link href="/works">Examples</Link>
             <span>/</span>
             <span>{project.title}</span>
           </div>

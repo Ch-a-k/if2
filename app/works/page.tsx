@@ -5,19 +5,24 @@ import {client, queries, getImageUrl, getOgImageUrl, type Project, type SiteSett
 import styles from './page.module.css'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await client.fetch<SiteSettings>(queries.siteSettings)
+  const settings = await client.fetch<SiteSettings>(queries.siteSettings, {}, {
+    next: { 
+      revalidate: 3600,
+      tags: ['siteSettings', 'works-seo']
+    }
+  })
   const siteUrl = 'https://in-fomo.com'
   
   // Use Works page SEO settings if available, otherwise fallback to global settings
-  const ogTitle = settings?.worksPageSeo?.ogTitle || 'Our Works | IN-FOMO.';
-  const ogDescription = settings?.worksPageSeo?.ogDescription || 'Explore our portfolio of successful digital projects. Web development, mobile apps, Web3 solutions, and innovative digital products.';
+  const ogTitle = settings?.worksPageSeo?.ogTitle || 'Examples of Major Projects | IN-FOMO.';
+  const ogDescription = settings?.worksPageSeo?.ogDescription || 'Check out our portfolio of successful large-scale projects and digital solutions. We showcase our major achievements—daily routine projects aren\'t included here, but that doesn\'t mean we don\'t handle them.';
   const ogImageData = settings?.worksPageSeo?.ogImage || settings?.ogImage;
   const ogImageUrl = ogImageData ? getOgImageUrl(ogImageData) : null;
 
   return {
-    title: 'Our Works | IN-FOMO. - Digital Innovation Portfolio',
-    description: 'Explore our portfolio of successful digital projects. Web development, mobile apps, Web3 solutions, and innovative digital products.',
-    keywords: ['portfolio', 'case studies', 'web development projects', 'mobile apps', 'digital solutions'],
+    title: 'Examples of Major Projects | IN-FOMO.',
+    description: 'Check out our portfolio of successful large-scale projects and digital solutions. We showcase our major achievements—daily routine projects aren\'t included here, but that doesn\'t mean we don\'t handle them.',
+    keywords: ['portfolio', 'case studies', 'web development projects', 'mobile apps', 'digital solutions', 'major projects', 'examples'],
     openGraph: {
       title: ogTitle,
       description: ogDescription,
@@ -58,9 +63,9 @@ export default async function WorksPage() {
     <div className={styles.works}>
       <section className={styles.hero}>
         <div className={styles.container}>
-          <h1 className={styles.title}>Our Works</h1>
+          <h1 className={styles.title}>Examples of Major Projects</h1>
           <p className={styles.description}>
-            Explore our portfolio of successful projects and digital solutions.
+            Check out our portfolio of successful large-scale projects and digital solutions. We showcase our major achievements—daily routine projects aren't included here, but that doesn't mean we don't handle them.
           </p>
         </div>
       </section>
