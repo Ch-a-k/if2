@@ -72,7 +72,7 @@ export async function generateMetadata() {
   }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -84,9 +84,9 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" type="image/png" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <GoogleTagManager />
       </head>
       <body>
-        <GoogleTagManager />
         <Analytics />
         <Header />
         <main>{children}</main>

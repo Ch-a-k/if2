@@ -1,36 +1,26 @@
-'use client';
-
 import Script from 'next/script';
-import { useEffect, useState } from 'react';
+import { client, queries } from '@/lib/sanity';
 
-export default function GoogleTagManager() {
-  const [gtmId, setGtmId] = useState<string | null>(null);
+async function getGTMId() {
+  try {
+    const settings = await client.fetch(queries.siteSettings, {}, {
+      next: { revalidate: 3600, tags: ['siteSettings'] }
+    });
+    return settings?.gtmId || null;
+  } catch (error) {
+    console.error('Failed to fetch GTM settings:', error);
+    return null;
+  }
+}
 
-  useEffect(() => {
-    // Fetch GTM ID from API/Sanity
-    const fetchGTM = async () => {
-      try {
-        const response = await fetch('/api/settings');
-        const data = await response.json();
-        if (data.gtmId) {
-          setGtmId(data.gtmId);
-        }
-      } catch (error) {
-        console.error('Failed to fetch GTM settings:', error);
-        // Fallback to environment variable
-        const envGTM = process.env.NEXT_PUBLIC_GTM_ID;
-        if (envGTM) setGtmId(envGTM);
-      }
-    };
-
-    fetchGTM();
-  }, []);
+export default async function GoogleTagManager() {
+  const gtmId = await getGTMId();
 
   if (!gtmId) return null;
 
   return (
     <>
-      {/* Google Tag Manager */}
+      {/* Google Tag Manager - в <head> */}
       <Script
         id="gtm-script"
         strategy="afterInteractive"
@@ -44,7 +34,7 @@ export default function GoogleTagManager() {
           `,
         }}
       />
-      {/* Google Tag Manager (noscript) */}
+      {/* Google Tag Manager (noscript) - в <body> */}
       <noscript>
         <iframe
           src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}

@@ -3,10 +3,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {notFound} from 'next/navigation'
 import {PortableText} from '@portabletext/react'
-import {client, queries, getImageUrl, getOgImageUrl, type Project} from '@/lib/sanity'
+import {client, queries, getImageUrl, getOgImageUrl, type Project, type SiteSettings} from '@/lib/sanity'
 import PartnersSection from '@/components/PartnersSection'
 import ContactForm from '@/components/blog/ContactForm'
 import ProjectGallery from '@/components/ProjectGallery'
+import ImageWithWatermark from '@/components/ImageWithWatermark'
 import styles from './page.module.css'
 
 export const revalidate = 3600
@@ -82,6 +83,12 @@ export default async function ProjectPage({params}: PageProps) {
   const heroImageUrl = project.heroImage ? getImageUrl(project.heroImage) : getImageUrl(project.coverImage)
   const logoUrl = project.logo ? getImageUrl(project.logo) : null
 
+  // Получаем watermark logo из настроек
+  const settings = await client.fetch<SiteSettings>(queries.siteSettings, {}, {
+    next: { revalidate: 3600, tags: ['siteSettings'] }
+  })
+  const watermarkLogoUrl = settings?.watermarkLogo ? getImageUrl(settings.watermarkLogo) : null
+
   return (
     <div className={styles.project}>
       {/* Hero Section */}
@@ -116,11 +123,13 @@ export default async function ProjectPage({params}: PageProps) {
       <section className={styles.mainImage}>
         <div className={styles.container}>
             <div className={styles.heroImageWrapper}>
-              <Image
+              <ImageWithWatermark
                 src={heroImageUrl}
                 alt={project.title}
                 width={1200}
                 height={700}
+                watermark={project.heroImage?.watermark || project.coverImage?.watermark}
+                watermarkLogoUrl={watermarkLogoUrl}
                 className={styles.heroImage}
                 priority
               />
@@ -177,8 +186,10 @@ export default async function ProjectPage({params}: PageProps) {
                 url: getImageUrl(item) || '/placeholder.svg',
                 alt: item.alt || `${project.title} image ${index + 1}`,
                 wide: item.wide,
+                watermark: item.watermark,
               }))}
               projectTitle={project.title}
+              watermarkLogoUrl={watermarkLogoUrl}
             />
         </div>
       </section>
