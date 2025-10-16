@@ -87,11 +87,6 @@ export default defineType({
               type: 'string',
               title: 'Caption',
             },
-            {
-              name: 'watermark',
-              type: 'watermarkSettings',
-              title: 'Watermark Settings',
-            },
           ],
         },
       ],
@@ -110,11 +105,6 @@ export default defineType({
           type: 'string',
           title: 'Alternative text',
           validation: (Rule) => Rule.required(),
-        },
-        {
-          name: 'watermark',
-          type: 'watermarkSettings',
-          title: 'Watermark Settings',
         },
       ],
       validation: (Rule) => Rule.required(),

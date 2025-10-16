@@ -3,24 +3,20 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import ImageLightbox from './ImageLightbox'
-import ImageWithWatermark from './ImageWithWatermark'
-import { type WatermarkSettings } from '@/lib/sanity'
 import styles from './ProjectGallery.module.css'
 
 interface GalleryImage {
   url: string
   alt: string
   wide?: boolean
-  watermark?: WatermarkSettings
 }
 
 interface ProjectGalleryProps {
   images: GalleryImage[]
   projectTitle: string
-  watermarkLogoUrl?: string | null
 }
 
-export default function ProjectGallery({ images, projectTitle, watermarkLogoUrl }: ProjectGalleryProps) {
+export default function ProjectGallery({ images, projectTitle }: ProjectGalleryProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   return (
@@ -33,13 +29,11 @@ export default function ProjectGallery({ images, projectTitle, watermarkLogoUrl 
             onClick={() => setLightboxIndex(index)}
             aria-label={`View image ${index + 1}`}
           >
-            <ImageWithWatermark
+            <Image
               src={item.url}
               alt={item.alt || `${projectTitle} image ${index + 1}`}
               width={800}
               height={600}
-              watermark={item.watermark}
-              watermarkLogoUrl={watermarkLogoUrl}
               className={styles.galleryImage}
             />
             <div className={styles.galleryOverlay}>

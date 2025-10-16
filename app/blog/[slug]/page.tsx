@@ -3,12 +3,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {notFound} from 'next/navigation'
 import {PortableText} from '@portabletext/react'
-import {client, queries, getImageUrl, getOgImageUrl, type BlogPost, type SiteSettings} from '@/lib/sanity'
+import {client, queries, getImageUrl, getOgImageUrl, type BlogPost} from '@/lib/sanity'
 import ShareButtons from '@/components/blog/ShareButtons'
 import AdjacentPosts from '@/components/blog/AdjacentPosts'
 import PartnersSection from '@/components/PartnersSection'
 import ContactForm from '@/components/blog/ContactForm'
-import ImageWithWatermark from '@/components/ImageWithWatermark'
 import styles from './page.module.css'
 
 export const revalidate = 3600
@@ -89,12 +88,6 @@ export default async function BlogPostPage({params}: PageProps) {
   const ogImageUrl = getOgImageUrl(post.coverImage)
   const authorImageUrl = post.author.image ? getImageUrl(post.author.image) : null
   const siteUrl = 'https://in-fomo.com'
-
-  // Получаем watermark logo из настроек
-  const settings = await client.fetch<SiteSettings>(queries.siteSettings, {}, {
-    next: { revalidate: 3600, tags: ['siteSettings'] }
-  })
-  const watermarkLogoUrl = settings?.watermarkLogo ? getImageUrl(settings.watermarkLogo) : null
 
   // JSON-LD structured data
   const jsonLd = {
@@ -178,13 +171,11 @@ export default async function BlogPostPage({params}: PageProps) {
         {/* Cover Image */}
         {imageUrl && (
           <div className={styles.coverImage}>
-            <ImageWithWatermark
+            <Image
               src={imageUrl}
               alt={post.coverImage.alt}
               width={1200}
               height={630}
-              watermark={post.coverImage?.watermark}
-              watermarkLogoUrl={watermarkLogoUrl}
               className={styles.image}
               priority
             />
@@ -199,25 +190,20 @@ export default async function BlogPostPage({params}: PageProps) {
                 value={post.content}
                 components={{
                   types: {
-                    image: ({value}: any) => {
-                      const imgUrl = getImageUrl(value) || '/placeholder.svg';
-                      return (
-                        <figure className={styles.contentImage}>
-                          <ImageWithWatermark
-                            src={imgUrl}
-                            alt={value.alt || 'Article image'}
-                            width={800}
-                            height={600}
-                            watermark={value.watermark}
-                            watermarkLogoUrl={watermarkLogoUrl}
-                            className={styles.image}
-                          />
-                          {value.caption && (
-                            <figcaption className={styles.caption}>{value.caption}</figcaption>
-                          )}
-                        </figure>
-                      );
-                    },
+                    image: ({value}: any) => (
+                      <figure className={styles.contentImage}>
+                        <Image
+                          src={getImageUrl(value) || '/placeholder.svg'}
+                          alt={value.alt || 'Article image'}
+                          width={800}
+                          height={600}
+                          className={styles.image}
+                        />
+                        {value.caption && (
+                          <figcaption className={styles.caption}>{value.caption}</figcaption>
+                        )}
+                      </figure>
+                    ),
                   },
                   block: {
                     h2: ({children}: any) => <h2 className={styles.h2}>{children}</h2>,
