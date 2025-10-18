@@ -3,7 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
 import GoogleTagManager from '@/components/GoogleTagManager';
-import Analytics from '@/components/Analytics';
+import { Analytics } from '@vercel/analytics/next';
 import { client, queries, getOgImageUrl } from '@/lib/sanity';
 
 export async function generateMetadata() {
