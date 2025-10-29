@@ -32,9 +32,10 @@ export default function ProjectGallery({ images, projectTitle }: ProjectGalleryP
             <Image
               src={item.url}
               alt={item.alt || `${projectTitle} image ${index + 1}`}
-              width={800}
-              height={600}
+              width={1600}
+              height={1000}
               className={styles.galleryImage}
+              quality={95}
             />
             <div className={styles.galleryOverlay}>
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none">

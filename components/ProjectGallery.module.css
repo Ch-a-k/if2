@@ -1,24 +1,32 @@
 .galleryGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .galleryItem {
   position: relative;
-  aspect-ratio: 4/3;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 16px;
   cursor: pointer;
-  background: var(--color-background-secondary);
-  transition: transform 0.3s;
-  border: none;
+  background: #0d0d0d;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   padding: 0;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  max-height: 700px;
 }
 
 .galleryItem:hover {
-  transform: scale(1.02);
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .galleryItem:hover .galleryOverlay {
@@ -27,43 +35,62 @@
 
 .galleryItemWide {
   grid-column: span 2;
+  max-height: 900px;
 }
 
 .galleryImage {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  display: block;
+  max-height: 700px;
+}
+
+.galleryItemWide .galleryImage {
+  max-height: 900px;
 }
 
 .galleryItem:hover .galleryImage {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .galleryOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: all 0.3s ease;
   color: white;
 }
 
 @media (max-width: 768px) {
   .galleryGrid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 12px;
+  }
+
+  .galleryItem {
+    min-height: 200px;
+    max-height: 600px;
+    border-radius: 12px;
   }
 
   .galleryItemWide {
     grid-column: span 1;
+    max-height: 600px;
   }
 
-  .galleryItem {
-    aspect-ratio: 16/9;
+  .galleryImage {
+    max-height: 600px;
+  }
+
+  .galleryItemWide .galleryImage {
+    max-height: 600px;
   }
 }
 
