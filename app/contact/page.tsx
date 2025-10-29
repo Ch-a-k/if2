@@ -201,7 +201,7 @@ export default function ContactPage() {
                 </svg>
               </div>
               <h3 className={styles.officeCity}>Kyiv, Ukraine</h3>
-              <p className={styles.officeAddress}>вул. Антоновича, 44, Київ, Украина, 03186</p>
+              <p className={styles.officeAddress}>Antonovicha St., 44, Kyiv, Ukraine, 03186</p>
             </div>
             
             <div className={styles.officeCard}>
@@ -212,7 +212,7 @@ export default function ContactPage() {
                 </svg>
               </div>
               <h3 className={styles.officeCity}>Tallinn, Estonia</h3>
-              <p className={styles.officeAddress}>Lõõtsa tn 12, 11415 Tallinn, Эстония</p>
+              <p className={styles.officeAddress}>Lõõtsa tn 12, 11415 Tallinn, Estonia</p>
             </div>
           </div>
         </div>
