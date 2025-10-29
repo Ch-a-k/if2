@@ -89,22 +89,42 @@ export default defineType({
       of: [
         {
           type: 'image',
-          options: {hotspot: true},
+          options: {
+            hotspot: true,
+          },
           fields: [
             {
               name: 'alt',
               type: 'string',
               title: 'Alternative text',
+              description: 'Описание изображения для SEO и доступности',
             },
             {
               name: 'wide',
               type: 'boolean',
               title: 'Wide layout (2 columns)',
+              description: 'Занимает две колонки в галерее',
               initialValue: false,
             },
           ],
+          preview: {
+            select: {
+              media: 'asset',
+              alt: 'alt',
+              wide: 'wide',
+            },
+            prepare(selection: any) {
+              const {media, alt, wide} = selection
+              return {
+                title: alt || 'Изображение без описания',
+                subtitle: wide ? 'Широкое (2 колонки)' : 'Обычное (1 колонка)',
+                media,
+              }
+            },
+          },
         },
       ],
+      description: 'Галерея изображений проекта. Сначала загрузите изображение, затем заполните описание.',
     }),
     defineField({
       name: 'category',
