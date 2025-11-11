@@ -20,10 +20,10 @@ export default async function GoogleTagManager() {
 
   return (
     <>
-      {/* Google Tag Manager - в <head> */}
+      {/* Google Tag Manager - отложенная загрузка для лучшей производительности */}
       <Script
         id="gtm-script"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: `
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

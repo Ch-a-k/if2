@@ -66,7 +66,7 @@ if2/
 │       ├── WorksSection.tsx
 │       └── CTASection.tsx
 ├── public/
-│   └── logo.svg
+│   └── logo.png
 └── package.json
 ```
 

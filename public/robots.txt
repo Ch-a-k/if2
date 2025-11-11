@@ -1,0 +1,64 @@
+# robots.txt for IN-FOMO.
+
+User-agent: *
+Allow: /
+Allow: /llm.txt
+Allow: /sitemap.xml
+
+# LLM Crawlers
+User-agent: GPTBot
+Allow: /
+Allow: /llm.txt
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /llm.txt
+
+User-agent: Google-Extended
+Allow: /
+Allow: /llm.txt
+
+User-agent: CCBot
+Allow: /
+Allow: /llm.txt
+
+User-agent: anthropic-ai
+Allow: /
+Allow: /llm.txt
+
+User-agent: Claude-Web
+Allow: /
+Allow: /llm.txt
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llm.txt
+
+User-agent: Applebot-Extended
+Allow: /
+Allow: /llm.txt
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llm.txt
+
+User-agent: Amazonbot
+Allow: /
+Allow: /llm.txt
+
+User-agent: cohere-ai
+Allow: /
+Allow: /llm.txt
+
+# Disallow admin areas
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+
+# Sitemap location
+Sitemap: https://in-fomo.com/sitemap.xml
+
+# LLM.txt location for AI agents
+# LLM-friendly information: https://in-fomo.com/llm.txt
+
+
