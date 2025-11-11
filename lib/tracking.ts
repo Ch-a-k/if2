@@ -27,6 +27,8 @@ export interface UserTrackingData {
   // Поведение на сайте
   pagesVisited: string[];
   timeOnSite: number; // в секундах
+  activeTimeOnSite: number; // время реальной активности в секундах
+  engagementScore: number; // оценка вовлеченности (0-100)
   
   // Геолокация (если доступна)
   country?: string;
@@ -120,12 +122,16 @@ function getSessionStartTime(): number {
   try {
     const startTime = sessionStorage.getItem('sessionStartTime');
     if (startTime) {
-      return parseInt(startTime, 10);
-    } else {
-      const now = Date.now();
-      sessionStorage.setItem('sessionStartTime', now.toString());
-      return now;
+      const parsedTime = parseInt(startTime, 10);
+      // Проверяем, что время валидное (не NaN и не в будущем)
+      if (!isNaN(parsedTime) && parsedTime <= Date.now()) {
+        return parsedTime;
+      }
     }
+    // Если времени нет или оно невалидное, устанавливаем текущее время
+    const now = Date.now();
+    sessionStorage.setItem('sessionStartTime', now.toString());
+    return now;
   } catch {
     return Date.now();
   }
@@ -133,8 +139,98 @@ function getSessionStartTime(): number {
 
 // Получить время на сайте в секундах
 function getTimeOnSite(): number {
-  const startTime = getSessionStartTime();
-  return Math.floor((Date.now() - startTime) / 1000);
+  if (typeof window === 'undefined') return 0;
+  
+  try {
+    const startTime = getSessionStartTime();
+    const now = Date.now();
+    const diff = now - startTime;
+    
+    // Проверяем, что разница разумная (не отрицательная и не больше 24 часов)
+    if (diff < 0 || diff > 86400000) {
+      console.warn('Invalid time difference detected:', diff);
+      return 0;
+    }
+    
+    return Math.floor(diff / 1000);
+  } catch (error) {
+    console.error('Error calculating time on site:', error);
+    return 0;
+  }
+}
+
+// Обновить последнее время активности
+export function updateLastActivity() {
+  if (typeof window === 'undefined') return;
+  
+  try {
+    const now = Date.now();
+    sessionStorage.setItem('lastActivity', now.toString());
+  } catch (error) {
+    console.error('Error updating last activity:', error);
+  }
+}
+
+// Получить время активности (с учетом реальных взаимодействий)
+function getActiveTimeOnSite(): number {
+  if (typeof window === 'undefined') return 0;
+  
+  try {
+    const startTime = getSessionStartTime();
+    const lastActivity = sessionStorage.getItem('lastActivity');
+    
+    if (lastActivity) {
+      const lastActiveTime = parseInt(lastActivity, 10);
+      if (!isNaN(lastActiveTime)) {
+        const diff = lastActiveTime - startTime;
+        // Проверяем, что разница валидная
+        if (diff >= 0 && diff <= 86400000) {
+          return Math.floor(diff / 1000);
+        }
+      }
+    }
+    
+    // Если lastActivity не установлен, используем общее время
+    return getTimeOnSite();
+  } catch (error) {
+    console.error('Error calculating active time:', error);
+    return 0;
+  }
+}
+
+// Рассчитать оценку вовлеченности (0-100)
+function calculateEngagementScore(): number {
+  if (typeof window === 'undefined') return 0;
+  
+  try {
+    const pagesVisited = getVisitedPages().length;
+    const timeOnSite = getTimeOnSite();
+    const activeTime = getActiveTimeOnSite();
+    
+    // Факторы вовлеченности:
+    // - Количество страниц (до 5 страниц = +20 баллов за каждую)
+    // - Время на сайте (до 5 минут = +1 балл за каждые 5 секунд)
+    // - Активность (активное время / общее время * 40 баллов)
+    
+    let score = 0;
+    
+    // Баллы за страницы (максимум 30)
+    score += Math.min(pagesVisited * 6, 30);
+    
+    // Баллы за время (максимум 30)
+    score += Math.min(Math.floor(timeOnSite / 5), 30);
+    
+    // Баллы за активность (максимум 40)
+    if (timeOnSite > 0) {
+      const activityRatio = activeTime / timeOnSite;
+      score += Math.floor(activityRatio * 40);
+    }
+    
+    return Math.min(Math.round(score), 100);
+  } catch (error) {
+    console.error('Error calculating engagement score:', error);
+    return 0;
+  }
 }
 
 // Получить landing page
@@ -171,11 +267,18 @@ export function collectTrackingData(): UserTrackingData {
       currentPage: '',
       pagesVisited: [],
       timeOnSite: 0,
+      activeTimeOnSite: 0,
+      engagementScore: 0,
     };
   }
   
+  // Обновляем последнее время активности при сборе данных
+  updateLastActivity();
+  
   const { browser, os, device } = getBrowserInfo();
   const utmParams = getUTMParams();
+  const timeOnSite = getTimeOnSite();
+  const activeTime = getActiveTimeOnSite();
   
   return {
     // Основная информация
@@ -199,7 +302,9 @@ export function collectTrackingData(): UserTrackingData {
     
     // Поведение на сайте
     pagesVisited: getVisitedPages(),
-    timeOnSite: getTimeOnSite(),
+    timeOnSite,
+    activeTimeOnSite: activeTime,
+    engagementScore: calculateEngagementScore(),
   };
 }
 
@@ -237,6 +342,8 @@ export function formatTrackingForTelegram(tracking: UserTrackingData): string {
   // Поведение
   message += `\n\n📈 <b>User Behavior:</b>`;
   message += `\n• Time on site: ${Math.floor(tracking.timeOnSite / 60)}m ${tracking.timeOnSite % 60}s`;
+  message += `\n• Active time: ${Math.floor(tracking.activeTimeOnSite / 60)}m ${tracking.activeTimeOnSite % 60}s`;
+  message += `\n• Engagement: ${tracking.engagementScore}/100`;
   message += `\n• Pages visited: ${tracking.pagesVisited.length}`;
   
   if (tracking.pagesVisited.length > 0) {

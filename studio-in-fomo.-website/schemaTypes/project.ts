@@ -47,6 +47,8 @@ export default defineType({
           name: 'alt',
           type: 'string',
           title: 'Alternative text',
+          description: 'Alternative text for accessibility (required)',
+          validation: (Rule) => Rule.required().error('Alt text is required for accessibility'),
         },
       ],
       validation: (Rule) => Rule.required(),
@@ -58,6 +60,15 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      fields: [
+        {
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Alternative text for accessibility (required when logo is used)',
+          validation: (Rule) => Rule.required().error('Alt text is required for accessibility'),
+        },
+      ],
     }),
     defineField({
       name: 'heroImage',
@@ -71,6 +82,8 @@ export default defineType({
           name: 'alt',
           type: 'string',
           title: 'Alternative text',
+          description: 'Alternative text for accessibility (required)',
+          validation: (Rule) => Rule.required().error('Alt text is required for accessibility'),
         },
       ],
       description: 'Large hero image for project page',

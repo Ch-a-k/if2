@@ -55,6 +55,15 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      fields: [
+        {
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Alternative text for accessibility (required)',
+          validation: (Rule) => Rule.required().error('Alt text is required for accessibility'),
+        },
+      ],
       hidden: ({parent}) => parent?.mediaType !== 'image',
     }),
     defineField({
@@ -102,6 +111,15 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      fields: [
+        {
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Alternative text for accessibility (required)',
+          validation: (Rule) => Rule.required().error('Alt text is required for accessibility'),
+        },
+      ],
       hidden: ({parent}) => !parent?.hasCompanyLogo,
     }),
     defineField({

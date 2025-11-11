@@ -76,6 +76,7 @@ export interface Partner {
       _ref: string
       _type: 'reference'
     }
+    alt: string
   }
   url: string
   subtitle?: string
@@ -116,6 +117,7 @@ export interface ClutchBadge {
       _ref: string
       _type: 'reference'
     }
+    alt: string
   }
   order?: number
 }
@@ -151,6 +153,7 @@ export interface Project {
       _ref: string
       _type: 'reference'
     }
+    alt?: string
   }
   heroImage?: {
     asset: {
@@ -212,6 +215,7 @@ export interface TestimonialNew {
       _ref: string
       _type: 'reference'
     }
+    alt?: string
   }
   videoSource?: 'file' | 'url'
   mediaVideoFile?: {
@@ -228,6 +232,7 @@ export interface TestimonialNew {
       _ref: string
       _type: 'reference'
     }
+    alt?: string
   }
   clutchLink?: string
   caseStudySlug?: string // Already resolved by query

@@ -178,7 +178,7 @@ export default function TestimonialsClient({ testimonials }: TestimonialsClientP
                     <div className={styles.imageWrapper}>
                       <Image
                         src={mediaUrl}
-                        alt={currentTestimonial.author}
+                        alt={currentTestimonial.mediaImage?.alt || `Photo of ${currentTestimonial.author}`}
                         width={400}
                         height={600}
                         className={styles.testimonialImage}
@@ -222,7 +222,7 @@ export default function TestimonialsClient({ testimonials }: TestimonialsClientP
                         <span className={styles.companyLogoWrapper}>
                           <Image
                             src={companyLogoUrl}
-                            alt={currentTestimonial.company}
+                            alt={currentTestimonial.companyLogo?.alt || currentTestimonial.company}
                             width={80}
                             height={24}
                             className={styles.companyLogo}

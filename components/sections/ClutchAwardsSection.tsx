@@ -54,7 +54,7 @@ export default async function ClutchAwardsSection() {
                   <div className={styles.badgeImage}>
                     <Image
                       src={imageUrl}
-                      alt={badge.title}
+                      alt={badge.image?.alt || badge.title}
                       width={200}
                       height={200}
                       className={styles.grayscaleImage}

@@ -34,7 +34,7 @@ export default async function PartnersSection() {
               <div className={styles.logoWrapper}>
                 <Image
                   src={getImageUrl(partner.logo) || '/placeholder.svg'}
-                  alt={partner.name}
+                  alt={partner.logo?.alt || partner.name}
                   width={200}
                   height={100}
                   className={styles.logo}

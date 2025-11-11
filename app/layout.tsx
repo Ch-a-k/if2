@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
 import GoogleTagManager from '@/components/GoogleTagManager';
 import StructuredData from '@/components/StructuredData';
+import TrackingInit from '@/components/TrackingInit';
 import { Analytics } from '@vercel/analytics/next';
 import { client, queries, getOgImageUrl } from '@/lib/sanity';
 import { Inter } from 'next/font/google';
@@ -128,6 +129,7 @@ export default async function RootLayout({
         <StructuredData />
       </head>
       <body className={inter.className}>
+        <TrackingInit />
         <Analytics />
         <Header />
         <main>{children}</main>
