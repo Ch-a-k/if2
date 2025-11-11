@@ -1,11 +1,13 @@
 # robots.txt for IN-FOMO.
+# All directives follow standard robots.txt protocol
 
 User-agent: *
 Allow: /
-Allow: /llm.txt
-Allow: /sitemap.xml
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
 
-# LLM Crawlers
+# LLM & AI Crawlers - Allow access to LLM context
 User-agent: GPTBot
 Allow: /
 Allow: /llm.txt
@@ -50,15 +52,6 @@ User-agent: cohere-ai
 Allow: /
 Allow: /llm.txt
 
-# Disallow admin areas
-Disallow: /api/
-Disallow: /admin/
-Disallow: /_next/
-
 # Sitemap location
 Sitemap: https://in-fomo.com/sitemap.xml
-
-# LLM.txt location for AI agents
-# LLM-friendly information: https://in-fomo.com/llm.txt
-
 

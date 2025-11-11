@@ -9,6 +9,16 @@
     "lint": "next lint",
     "analyze": "ANALYZE=true next build"
   },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Edge versions",
+    "last 2 Safari versions",
+    "last 2 Firefox versions",
+    "iOS >= 14",
+    "not dead",
+    "not IE 11",
+    "not op_mini all"
+  ],
   "dependencies": {
     "@portabletext/react": "^4.0.3",
     "@sanity/image-url": "^1.2.0",

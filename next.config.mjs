@@ -8,11 +8,21 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   
+  // Отключение полифилов для современных браузеров
+  // Это уменьшит размер bundle на ~11.7 KiB
+  transpilePackages: [],
+  
   // Современный JS без полифиллов
   experimental: {
     optimizePackageImports: ['@sanity/ui', '@sanity/icons'],
-    optimizeCss: true, // Оптимизация CSS для уменьшения размера
+    // optimizeCss: true, // Отключено: требует установки critters
   },
+  
+  // Настройка SWC для современных браузеров (ES2020+)
+  // Отключает транспиляцию базовых функций ES6+
+  // Array.prototype.at, flat, flatMap, Object.fromEntries, etc.
+  swcMinify: true,
+  compress: true,
   
   // Отключение полифиллов для современных браузеров
   webpack: (config, { isServer }) => {
@@ -26,10 +36,6 @@ const nextConfig = {
     }
     return config;
   },
-  
-  // Оптимизация для production
-  swcMinify: true,
-  compress: true,
   
   images: {
     remotePatterns: [
