@@ -7,7 +7,7 @@ Disallow: /api/
 Disallow: /admin/
 Disallow: /_next/
 
-# LLM & AI Crawlers - Allow access to LLM context
+# Allow list of AI crawlers for llm context access
 User-agent: GPTBot
 Allow: /
 Allow: /llm.txt
@@ -52,6 +52,5 @@ User-agent: cohere-ai
 Allow: /
 Allow: /llm.txt
 
-# Sitemap location
 Sitemap: https://in-fomo.com/sitemap.xml
 
