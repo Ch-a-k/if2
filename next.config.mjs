@@ -11,6 +11,7 @@ const nextConfig = {
   // Современный JS без полифиллов
   experimental: {
     optimizePackageImports: ['@sanity/ui', '@sanity/icons'],
+    optimizeCss: true, // Оптимизация CSS для уменьшения размера
   },
   
   // Отключение полифиллов для современных браузеров

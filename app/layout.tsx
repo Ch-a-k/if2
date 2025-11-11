@@ -6,6 +6,17 @@ import GoogleTagManager from '@/components/GoogleTagManager';
 import StructuredData from '@/components/StructuredData';
 import { Analytics } from '@vercel/analytics/next';
 import { client, queries, getOgImageUrl } from '@/lib/sanity';
+import { Inter } from 'next/font/google';
+
+// Оптимизированная загрузка шрифтов через next/font
+const inter = Inter({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  display: 'swap',
+  variable: '--font-inter',
+  preload: true,
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+});
 
 export async function generateMetadata() {
   try {
@@ -94,40 +105,19 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         
         {/* DNS Prefetch для быстрой загрузки */}
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link rel="dns-prefetch" href="https://cdn.sanity.io" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         
         {/* Preconnect to critical external domains */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://cdn.sanity.io" />
         
         {/* Preload critical resources */}
-        <link rel="preload" href="/logo.png" as="image" type="image/svg+xml" />
-        <link 
-          rel="preload" 
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fredoka+One&display=swap" 
-          as="style"
-        />
-        
-        {/* Optimized Google Fonts - асинхронная загрузка */}
-        <link 
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fredoka+One&display=swap" 
-          rel="stylesheet" 
-          media="print" 
-          // @ts-ignore
-          onLoad="this.media='all';this.onload=null;" 
-        />
-        <noscript>
-          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet" />
-        </noscript>
+        <link rel="preload" href="/logo.png" as="image" />
         
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" type="image/png" href="/favicon.ico" />
@@ -137,7 +127,7 @@ export default async function RootLayout({
         <GoogleTagManager />
         <StructuredData />
       </head>
-      <body>
+      <body className={inter.className}>
         <Analytics />
         <Header />
         <main>{children}</main>

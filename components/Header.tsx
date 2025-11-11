@@ -12,7 +12,7 @@ export default function Header() {
       <div className={styles.container}>
         <div className={styles.leftSection}>
           <Link href="/" className={styles.logo}>
-            <img src="/logo.png" alt="IN-FOMO." className={styles.logoImage} width="120" height="40" />
+            <img src="/logo.png" alt="IN-FOMO." className={styles.logoImage} />
           </Link>
         </div>
 
@@ -44,6 +44,8 @@ export default function Header() {
           <button 
             className={styles.menuButton}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
           >
             <span></span>
             <span></span>

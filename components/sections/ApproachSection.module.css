@@ -50,7 +50,7 @@
 .stepNumber {
   font-size: 72px;
   font-weight: 800;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.5);
   line-height: 1;
   transition: all 0.4s ease;
   letter-spacing: -0.02em;
@@ -115,14 +115,14 @@
 .dragHint span {
   font-size: 19px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.6);
   letter-spacing: 0.05em;
   animation: pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse {
   0%, 100% {
-    opacity: 0.4;
+    opacity: 0.6;
   }
   50% {
     opacity: 1;

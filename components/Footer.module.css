@@ -41,6 +41,7 @@
 .logo {
   display: inline-block;
   transition: all 0.3s ease;
+  transform-origin: center center;
 }
 
 .logo:hover {
@@ -48,6 +49,7 @@
 }
 
 .logoImage {
+  display: block;
   height: 32px;
   width: auto;
   object-fit: contain;
