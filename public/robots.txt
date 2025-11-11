@@ -1,6 +1,8 @@
 # robots.txt for IN-FOMO.
 # All directives follow standard robots.txt protocol
 
+# Content-signal: search=yes,ai-train=no
+
 User-agent: *
 Allow: /
 Disallow: /api/
