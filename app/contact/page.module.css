@@ -159,6 +159,21 @@
   transform: none;
 }
 
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.turnstile {
+  margin: 12px 0 4px;
+  min-height: 65px; /* keep layout stable while widget loads */
+}
+
 .successMessage,
 .errorMessage {
   margin-top: 20px;

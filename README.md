@@ -27,6 +27,19 @@ Modern, minimalist website for IN-FOMO. IT company built with Next.js 14 and Typ
 npm install
 ```
 
+## Contact Form → Telegram (Anti-spam)
+
+This project exposes `POST /api/telegram` (used by the Contact forms) to forward messages into Telegram.
+To avoid spam/abuse, the endpoint supports a honeypot + IP rate limiting + optional Cloudflare Turnstile verification.
+
+### Recommended environment variables
+
+- `TELEGRAM_BOT_TOKEN`: Telegram bot token used to send messages
+- `TELEGRAM_CHAT_ID`: Chat ID to receive messages
+- `ALLOWED_ORIGINS`: Comma-separated allowed origins/referers, e.g. `https://in-fomo.com,https://www.in-fomo.com`
+- `NEXT_PUBLIC_TURNSTILE_SITE_KEY`: Cloudflare Turnstile site key (public, used in forms)
+- `TURNSTILE_SECRET_KEY`: Cloudflare Turnstile secret key (server-only). If set, `/api/telegram` will require a valid `turnstileToken`.
+
 ### Run Development Server
 
 ```bash

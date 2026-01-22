@@ -1,8 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Script from 'next/script';
 import styles from './page.module.css';
 import { collectTrackingData, trackPageVisit } from '@/lib/tracking';
+
+declare global {
+  interface Window {
+    onTurnstileSuccess?: (token: string) => void;
+    onTurnstileExpired?: () => void;
+  }
+}
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -11,10 +19,25 @@ export default function ContactPage() {
     message: '',
   });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [honeypot, setHoneypot] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState<string>('');
+
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   useEffect(() => {
     trackPageVisit('/contact');
   }, []);
+
+  useEffect(() => {
+    if (!turnstileSiteKey) return;
+    window.onTurnstileSuccess = (token: string) => setTurnstileToken(token);
+    window.onTurnstileExpired = () => setTurnstileToken('');
+
+    return () => {
+      delete window.onTurnstileSuccess;
+      delete window.onTurnstileExpired;
+    };
+  }, [turnstileSiteKey]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,12 +56,16 @@ export default function ContactPage() {
         body: JSON.stringify({
           ...formData,
           tracking,
+          website: honeypot,
+          turnstileToken,
         }),
       });
 
       if (response.ok) {
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
+        setHoneypot('');
+        setTurnstileToken('');
         setTimeout(() => setStatus('idle'), 5000);
       } else {
         throw new Error('Failed to send');
@@ -59,6 +86,9 @@ export default function ContactPage() {
 
   return (
     <div className={styles.contact}>
+      {turnstileSiteKey && (
+        <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
+      )}
       <section className={styles.hero}>
         <div className={styles.container}>
           <h1 className={styles.title}>Let's Build</h1>
@@ -71,6 +101,18 @@ export default function ContactPage() {
           <div className={styles.grid}>
             <div className={styles.formSection}>
               <form className={styles.form} onSubmit={handleSubmit}>
+                {/* Honeypot (anti-bot). Hidden from users via CSS */}
+                <input
+                  type="text"
+                  name="website"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  className={styles.honeypot}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                />
+
                 <div className={styles.formGroup}>
                   <label className={styles.label}>Name</label>
                   <input
@@ -107,10 +149,19 @@ export default function ContactPage() {
                   />
                 </div>
 
+                {turnstileSiteKey && (
+                  <div
+                    className={`${styles.turnstile} cf-turnstile`}
+                    data-sitekey={turnstileSiteKey}
+                    data-callback="onTurnstileSuccess"
+                    data-expired-callback="onTurnstileExpired"
+                  />
+                )}
+
                 <button 
                   type="submit" 
                   className={styles.submitButton}
-                  disabled={status === 'sending'}
+                  disabled={status === 'sending' || (!!turnstileSiteKey && !turnstileToken)}
                 >
                   <span>{status === 'sending' ? 'Sending...' : 'Send Message'}</span>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">

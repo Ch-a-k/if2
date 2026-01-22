@@ -254,6 +254,23 @@
   cursor: not-allowed;
 }
 
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.turnstile {
+  margin: 12px 0 4px;
+  min-height: 65px;
+  position: relative;
+  z-index: 1;
+}
+
 .privacy {
   margin-top: 16px;
   font-size: 13px;
