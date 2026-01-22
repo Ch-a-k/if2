@@ -73,7 +73,8 @@ async function verifyTurnstile(token: string | undefined, ip: string) {
 
   if (!resp.ok) return { required: true, ok: false as const, error: 'Turnstile verify failed' };
   const data = (await resp.json()) as { success?: boolean };
-  return { required: true, ok: Boolean(data?.success) as const, error: data?.success ? undefined : 'Turnstile rejected' };
+  const ok = Boolean(data?.success);
+  return { required: true, ok, error: ok ? undefined : 'Turnstile rejected' };
 }
 
 export async function POST(request: NextRequest) {
